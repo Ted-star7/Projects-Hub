@@ -1,52 +1,172 @@
-<div class="min-h-screen flex items-center justify-center" style="background-color: #260B01; font-family: 'Segoe UI', sans-serif;">
+<div
+  class="min-h-screen bg-gradient-to-tr from-gray-100 via-white to-gray-50 flex items-center justify-center px-6 py-12 relative overflow-hidden"
+>
+  <!-- Optional subtle animated gradient shape background -->
+  <div
+    class="absolute top-0 left-0 w-[600px] h-[600px] bg-yellow-300 opacity-20 rounded-full -translate-x-1/2 -translate-y-1/2 animate-blob mix-blend-multiply filter blur-3xl pointer-events-none"
+  ></div>
+  <div
+    class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-yellow-400 opacity-30 rounded-full translate-x-1/2 translate-y-1/2 animate-blob animation-delay-4000 mix-blend-multiply filter blur-3xl pointer-events-none"
+  ></div>
 
-  <div class="text-center text-[#D9BC9A] animate-fade-in-up">
-    <!-- Logo -->
-    <div class="mb-6 animate-scale-in">
-      <div class="flex justify-center">
-        <div class="w-16 h-16 rounded-xl shadow-lg flex items-center justify-center" style="background-color: #D9BC9A;">
-          <span class="text-3xl" style="color: #734226;">📝</span>
-        </div>
-      </div>
-      <h1 class="text-5xl font-bold mt-4 tracking-wide">WRITERS</h1>
-      <h2 class="text-4xl font-bold -mt-2 tracking-wide">HUB</h2>
+  <div
+    class="bg-white rounded-3xl shadow-2xl max-w-3xl w-full p-14
+           transform animate-fade-slide-up"
+  >
+    <!-- Logo & Brand -->
+    <div class="flex items-center justify-center mb-14 space-x-8">
+      <img
+        src="assets/logo.jpg"
+        alt="ScriptHive Logo"
+        class="h-28 w-auto drop-shadow-lg"
+      />
+      <h1
+        class="text-6xl font-extrabold tracking-wide text-gray-900 select-none"
+      >
+        ScriptHive
+      </h1>
     </div>
 
-    <!-- Login Box -->
-    <div class="rounded-xl px-6 py-6 w-80 space-y-5 shadow-2xl animate-slide-in" style="background-color: #592B1B;">
+    <h2
+      class="text-center text-4xl font-semibold text-gray-900 mb-16 tracking-tight"
+    >
+      Employer Login
+    </h2>
 
-      <!-- Email Field -->
-      <div class="transition duration-300 ease-in-out hover:scale-[1.02]">
-        <label class="block mb-1 text-sm font-medium text-[#D9BC9A]">Email address</label>
-        <div class="flex items-center rounded px-3 py-2 shadow-inner" style="background-color: #D9BC9A; color: #734226;">
-          <span class="mr-2">📧</span>
-          <input type="email" placeholder="Email address" class="bg-transparent outline-none w-full placeholder-[#734226]" />
+    <form
+      #loginForm="ngForm"
+      (ngSubmit)="onSubmit(loginForm)"
+      novalidate
+      class="max-w-md mx-auto space-y-8"
+    >
+      <!-- Email -->
+      <div class="relative">
+        <input
+          id="email"
+          name="email"
+          ngModel
+          required
+          email
+          #email="ngModel"
+          type="email"
+          placeholder=" "
+          autocomplete="username"
+          class="peer block w-full appearance-none border-2 border-gray-300 rounded-xl
+                 bg-transparent px-4 pt-5 pb-2 text-lg text-gray-900 placeholder-transparent
+                 focus:border-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-300
+                 transition-shadow duration-300 shadow-sm"
+        />
+        <label
+          for="email"
+          class="absolute left-4 top-3 text-gray-500 text-lg cursor-text
+                 transition-all duration-300 peer-placeholder-shown:top-5 peer-placeholder-shown:text-base
+                 peer-placeholder-shown:text-gray-400 peer-focus:top-3 peer-focus:text-gray-600 peer-focus:text-lg"
+          >Email Address</label
+        >
+        <div
+          *ngIf="email.invalid && (email.dirty || email.touched)"
+          class="mt-1 text-sm text-red-600 font-semibold"
+        >
+          Please enter a valid email
         </div>
       </div>
 
-      <!-- Password Field -->
-      <div class="transition duration-300 ease-in-out hover:scale-[1.02]">
-        <label class="block mb-1 text-sm font-medium text-[#D9BC9A]">Password</label>
-        <div class="flex items-center rounded px-3 py-2 shadow-inner" style="background-color: #D9BC9A; color: #734226;">
-          <span class="mr-2">🔑</span>
-          <input type="password" placeholder="Password" class="bg-transparent outline-none w-full placeholder-[#734226]" />
+      <!-- Password -->
+      <div class="relative">
+        <input
+          id="password"
+          name="password"
+          ngModel
+          required
+          minlength="6"
+          #password="ngModel"
+          type="password"
+          placeholder=" "
+          autocomplete="current-password"
+          class="peer block w-full appearance-none border-2 border-gray-300 rounded-xl
+                 bg-transparent px-4 pt-5 pb-2 text-lg text-gray-900 placeholder-transparent
+                 focus:border-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-300
+                 transition-shadow duration-300 shadow-sm"
+        />
+        <label
+          for="password"
+          class="absolute left-4 top-3 text-gray-500 text-lg cursor-text
+                 transition-all duration-300 peer-placeholder-shown:top-5 peer-placeholder-shown:text-base
+                 peer-placeholder-shown:text-gray-400 peer-focus:top-3 peer-focus:text-gray-600 peer-focus:text-lg"
+          >Password</label
+        >
+        <div
+          *ngIf="password.invalid && (password.dirty || password.touched)"
+          class="mt-1 text-sm text-red-600 font-semibold"
+        >
+          Password must be at least 6 characters
         </div>
       </div>
 
-      <!-- Forgot password -->
-      <div class="text-right text-xs">
-        <a href="#" class="text-[#D9BC9A] hover:underline">Forgot password?</a>
+      <!-- Forgot Password Link -->
+      <div class="text-right">
+        <a
+          href="/forgot-password"
+          class="text-yellow-500 font-semibold hover:underline hover:text-yellow-600 transition"
+          >Forgot Password?</a
+        >
       </div>
 
-      <!-- Login Button -->
-      <button class="w-full font-semibold py-2 rounded-full transition-all duration-300 hover:brightness-110 hover:scale-105 shadow-lg" style="background-color: #BF8C60; color: #260B01;">
-        Log in
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid || isSubmitting"
+        class="group relative w-full py-4 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500
+               text-white text-xl font-extrabold shadow-lg transition-transform duration-300
+               hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-yellow-300
+               disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center overflow-hidden"
+      >
+        <!-- Glow Pulse Effect -->
+        <span
+          class="absolute inset-0 bg-yellow-300 opacity-0 group-hover:opacity-20 rounded-xl transition-opacity duration-500"
+        ></span>
+
+        <!-- Spinner -->
+        <svg
+          *ngIf="isSubmitting"
+          class="animate-spin mr-3 h-6 w-6 text-white z-10"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+          ></path>
+        </svg>
+
+        Login
       </button>
+    </form>
 
-      <!-- Sign Up -->
-      <p class="text-xs text-center text-[#D9BC9A]">
-        Don’t have an <span class="font-bold">account</span>? <a href="#" class="font-bold hover:underline">Sign up</a>
-      </p>
+    <!-- Bottom Links -->
+    <div
+      class="mt-16 flex flex-col md:flex-row justify-center gap-10 text-gray-700 text-lg font-semibold"
+    >
+      <a
+        href="/profile"
+        class="text-yellow-500 hover:underline hover:text-yellow-600 transition"
+        >Are you a writer? Click here.</a
+      >
+      <a
+        href="/registration"
+        class="text-yellow-500 hover:underline hover:text-yellow-600 transition"
+        >New Employer? Sign Up</a
+      >
     </div>
   </div>
 </div>

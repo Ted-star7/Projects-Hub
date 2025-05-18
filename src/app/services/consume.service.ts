@@ -54,7 +54,10 @@ export class ServicesService {
       .pipe(catchError(this.handleError));
   }
 
- 
+  public putRequest(endpoint: string, data: any, token: string | null): Observable<any> {
+    const headers = this.createHeaders(token);
+    return this.httpClient.put(`${this.url}${endpoint}`, data, { headers }).pipe(catchError(this.handleError));
+  }
 
   // Create headers method
   private createHeaders(token: string | null, isFormData: boolean = false): HttpHeaders {

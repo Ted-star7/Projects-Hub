@@ -19,6 +19,7 @@ export const routes: Routes = [
   { path: 'contact-us', loadComponent: () => import('./contact/contact.component').then(m => m.ContactComponent) },
   { path: 'login', loadComponent: () => import('./login/login.component').then(m => m.LoginComponent) },
   { path: 'registration', loadComponent: () => import('./registration/registration.component').then(m => m.RegistrationComponent) },
+  { path: 'profile', loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent) },
 //   { path: 'blog', loadComponent: () => import('./blog/blog.component').then(m => m.BlogComponent) },
 
 ];

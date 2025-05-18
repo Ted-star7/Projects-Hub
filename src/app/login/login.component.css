@@ -1,8 +1,9 @@
-
-@keyframes fade-in-up {
+/* Fade and slide up animation for form container */
+/* Add this to login.component.css or global styles */
+@keyframes fadeSlideUp {
   0% {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(20px);
   }
   100% {
     opacity: 1;
@@ -10,52 +11,46 @@
   }
 }
 
-@keyframes slide-up {
+.animate-fade-slide-up {
+  animation: fadeSlideUp 0.8s ease forwards;
+}
+
+@keyframes fadeSlideUp {
   0% {
-    transform: translateY(80px);
     opacity: 0;
+    transform: translateY(20px);
   }
   100% {
+    opacity: 1;
     transform: translateY(0);
-    opacity: 1;
   }
 }
 
-@keyframes pop {
-  0% {
-    transform: scale(0.6);
-    opacity: 0;
+.animate-fade-slide-up {
+  animation: fadeSlideUp 0.8s ease forwards;
+}
+
+/* Blob floating background animation */
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
   }
-  100% {
-    transform: scale(1);
-    opacity: 1;
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
   }
 }
 
-.animate-fade-in-up {
-  animation: fade-in-up 1.2s ease-out forwards;
+.animate-blob {
+  animation: blob 7s infinite;
 }
 
-.animate-slide-up {
-  animation: slide-up 1.4s ease-out forwards;
+/* Button glow pulse on hover */
+button:hover span {
+  opacity: 0.2 !important;
+  transition: opacity 0.5s ease;
 }
 
-.animate-pop {
-  animation: pop 1s ease-out;
-}
-
-.shadow-3d-btn {
-  box-shadow: 6px 6px 12px #260B01, -6px -6px 12px #734226;
-}
-
-.shadow-3d-card {
-  box-shadow: 12px 12px 24px #260B01, -12px -12px 24px #734226;
-}
-
-.shadow-hard-inset {
-  box-shadow: inset 4px 4px 8px #BF8C60, inset -4px -4px 8px #260B01;
-}
-
-.drop-shadow-3d {
-  text-shadow: 2px 2px 4px #260B01;
-}
+/* Spinner icon animation already covered by Tailwind's animate-spin */

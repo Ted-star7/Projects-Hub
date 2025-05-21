@@ -16,6 +16,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 
 export const routes: Routes = [
   { path: '', loadComponent: () => import('./home/home.component').then(m => m.HomeComponent) },
+   { path: 'activate-account', loadComponent: () => import('./activate-account/activate-account.component').then(m => m.ActivateAccountComponent) },
   { path: 'navbar', loadComponent: () => import('./navbar/navbar.component').then(m => m.NavbarComponent) },
   { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent) },
   { path: 'contact-us', loadComponent: () => import('./contact/contact.component').then(m => m.ContactComponent) },

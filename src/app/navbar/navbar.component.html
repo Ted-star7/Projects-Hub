@@ -1,0 +1,56 @@
+<header *ngIf="!hideNavbar"
+        class="bg-white shadow-sm py-4 px-8 flex justify-between items-center border-b border-gray-200 h-[80px] fixed top-0 right-0 z-30"
+        [class.left-64]="!isMobileView"
+        [class.left-0]="isMobileView"
+        [class.w-[calc(100%-16rem)]]="!isMobileView"
+        [class.w-full]="isMobileView">
+  <div class="flex items-center space-x-6">
+    <button
+      class="md:hidden text-gray-500 hover:text-gray-700 transition-colors"
+      (click)="toggleSidebar.emit()"
+    >
+      <i class="fas fa-bars text-xl"></i>
+    </button>
+    <div class="text-2xl font-bold text-gray-800">
+      <span class="text-yellow-500">Dashboard</span>
+    </div>
+  </div>
+
+  <div class="flex items-center space-x-6">
+    <div class="bg-gray-100 rounded-full px-4 py-2 text-sm font-medium">
+      Balance: <span class="text-green-600 font-semibold">KES 0.00</span>
+    </div>
+
+    <div class="flex items-center space-x-4">
+      <button
+        class="relative text-gray-500 hover:text-gray-700 transition-colors"
+      >
+        <i class="fas fa-bell text-xl"></i>
+        <span
+          class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
+          >3</span
+        >
+      </button>
+
+      <button
+        class="relative text-gray-500 hover:text-gray-700 transition-colors"
+      >
+        <i class="fas fa-envelope text-xl"></i>
+        <span
+          class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
+          >5</span
+        >
+      </button>
+
+      <div class="flex items-center space-x-2 cursor-pointer">
+        <div
+          class="h-10 w-10 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 flex items-center justify-center text-white font-bold"
+        >
+          TK
+        </div>
+        <span class="text-sm font-medium text-gray-700">Teddy Kibuthu</span>
+        <i class="fas fa-chevron-down text-xs text-gray-500"></i>
+      </div>
+    </div>
+  </div>
+</header>

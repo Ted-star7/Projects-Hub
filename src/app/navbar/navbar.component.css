@@ -1,0 +1,16 @@
+/* Ensure navbar stays fixed without covering content */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* High enough to stay above other content */
+  height: 96px;
+}
+
+@media (min-width: 768px) {
+  header {
+    left: 16rem; /* Account for sidebar */
+    width: calc(100% - 16rem);
+  }
+}

@@ -2,8 +2,7 @@
   class="min-h-screen bg-gradient-to-tr from-gray-50 via-white to-gray-100 flex items-center justify-center px-6 py-12"
 >
   <div
-    class="bg-white rounded-3xl shadow-2xl max-w-3xl w-full p-10
-           transform transition duration-700 hover:scale-[1.02] hover:shadow-3xl"
+    class="bg-white rounded-3xl shadow-2xl max-w-3xl w-full p-10 transform transition duration-700 hover:scale-[1.02] hover:shadow-3xl"
   >
     <!-- Logo & Brand -->
     <div class="flex items-center justify-center mb-10 space-x-6">
@@ -12,10 +11,8 @@
         alt="ScriptHive Logo"
         class="h-24 w-auto drop-shadow-lg"
       />
-      <h1
-        class="text-5xl font-extrabold tracking-wide text-gray-900 select-none"
-      >
-        ScriptHive
+      <h1 class="text-4xl font-bold text-gray-900 tracking-tight">
+        Script<span class="text-yellow-500">Hive</span>
       </h1>
     </div>
 
@@ -39,15 +36,11 @@
           required
           #fullname="ngModel"
           placeholder=" "
-          class="block py-3 px-4 w-full text-base text-gray-900 bg-transparent border border-gray-300 rounded-lg
-                 appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400
-                 peer transition-all duration-300 ease-in-out shadow-sm"
+          class="block py-3 px-4 w-full text-base text-gray-900 bg-transparent border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 peer transition-all duration-300 ease-in-out shadow-sm"
         />
         <label
           for="fullname"
-          class="absolute text-gray-500 text-base duration-300 transform -translate-y-6 scale-90 top-3 left-4 z-10 origin-[0]
-                 bg-white px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:left-4
-                 peer-focus:scale-90 peer-focus:-translate-y-6 peer-focus:left-4 select-none"
+          class="absolute text-gray-500 text-base duration-300 transform -translate-y-6 scale-90 top-3 left-4 z-10 origin-[0] bg-white px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:left-4 peer-focus:scale-90 peer-focus:-translate-y-6 peer-focus:left-4 select-none"
           >Full Name</label
         >
         <div
@@ -69,15 +62,11 @@
           email
           #email="ngModel"
           placeholder=" "
-          class="block py-3 px-4 w-full text-base text-gray-900 bg-transparent border border-gray-300 rounded-lg
-                 appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400
-                 peer transition-all duration-300 ease-in-out shadow-sm"
+          class="block py-3 px-4 w-full text-base text-gray-900 bg-transparent border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 peer transition-all duration-300 ease-in-out shadow-sm"
         />
         <label
           for="email"
-          class="absolute text-gray-500 text-base duration-300 transform -translate-y-6 scale-90 top-3 left-4 z-10 origin-[0]
-                 bg-white px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:left-4
-                 peer-focus:scale-90 peer-focus:-translate-y-6 peer-focus:left-4 select-none"
+          class="absolute text-gray-500 text-base duration-300 transform -translate-y-6 scale-90 top-3 left-4 z-10 origin-[0] bg-white px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:left-4 peer-focus:scale-90 peer-focus:-translate-y-6 peer-focus:left-4 select-none"
           >Email Address</label
         >
         <div
@@ -98,15 +87,11 @@
           required
           #username="ngModel"
           placeholder=" "
-          class="block py-3 px-4 w-full text-base text-gray-900 bg-transparent border border-gray-300 rounded-lg
-                 appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400
-                 peer transition-all duration-300 ease-in-out shadow-sm"
+          class="block py-3 px-4 w-full text-base text-gray-900 bg-transparent border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 peer transition-all duration-300 ease-in-out shadow-sm"
         />
         <label
           for="username"
-          class="absolute text-gray-500 text-base duration-300 transform -translate-y-6 scale-90 top-3 left-4 z-10 origin-[0]
-                 bg-white px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:left-4
-                 peer-focus:scale-90 peer-focus:-translate-y-6 peer-focus:left-4 select-none"
+          class="absolute text-gray-500 text-base duration-300 transform -translate-y-6 scale-90 top-3 left-4 z-10 origin-[0] bg-white px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:left-4 peer-focus:scale-90 peer-focus:-translate-y-6 peer-focus:left-4 select-none"
           >Username</label
         >
         <div
@@ -128,19 +113,17 @@
           pattern="^[0-9+()-\s]{7,15}$"
           #phonenumber="ngModel"
           placeholder=" "
-          class="block py-3 px-4 w-full text-base text-gray-900 bg-transparent border border-gray-300 rounded-lg
-                 appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400
-                 peer transition-all duration-300 ease-in-out shadow-sm"
+          class="block py-3 px-4 w-full text-base text-gray-900 bg-transparent border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 peer transition-all duration-300 ease-in-out shadow-sm"
         />
         <label
           for="phonenumber"
-          class="absolute text-gray-500 text-base duration-300 transform -translate-y-6 scale-90 top-3 left-4 z-10 origin-[0]
-                 bg-white px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:left-4
-                 peer-focus:scale-90 peer-focus:-translate-y-6 peer-focus:left-4 select-none"
+          class="absolute text-gray-500 text-base duration-300 transform -translate-y-6 scale-90 top-3 left-4 z-10 origin-[0] bg-white px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:left-4 peer-focus:scale-90 peer-focus:-translate-y-6 peer-focus:left-4 select-none"
           >Phone Number</label
         >
         <div
-          *ngIf="phonenumber.invalid && (phonenumber.dirty || phonenumber.touched)"
+          *ngIf="
+            phonenumber.invalid && (phonenumber.dirty || phonenumber.touched)
+          "
           class="text-red-600 mt-1 text-sm font-semibold"
         >
           Please enter a valid phone number
@@ -158,15 +141,11 @@
           minlength="6"
           #password="ngModel"
           placeholder=" "
-          class="block py-3 px-4 w-full text-base text-gray-900 bg-transparent border border-gray-300 rounded-lg
-                 appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400
-                 peer transition-all duration-300 ease-in-out shadow-sm"
+          class="block py-3 px-4 w-full text-base text-gray-900 bg-transparent border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 peer transition-all duration-300 ease-in-out shadow-sm"
         />
         <label
           for="password"
-          class="absolute text-gray-500 text-base duration-300 transform -translate-y-6 scale-90 top-3 left-4 z-10 origin-[0]
-                 bg-white px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:left-4
-                 peer-focus:scale-90 peer-focus:-translate-y-6 peer-focus:left-4 select-none"
+          class="absolute text-gray-500 text-base duration-300 transform -translate-y-6 scale-90 top-3 left-4 z-10 origin-[0] bg-white px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:left-4 peer-focus:scale-90 peer-focus:-translate-y-6 peer-focus:left-4 select-none"
           >Password</label
         >
         <div
@@ -187,20 +166,17 @@
           required
           #confirmPassword="ngModel"
           placeholder=" "
-          class="block py-3 px-4 w-full text-base text-gray-900 bg-transparent border border-gray-300 rounded-lg
-                 appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400
-                 peer transition-all duration-300 ease-in-out shadow-sm"
+          class="block py-3 px-4 w-full text-base text-gray-900 bg-transparent border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 peer transition-all duration-300 ease-in-out shadow-sm"
         />
         <label
           for="confirmPassword"
-          class="absolute text-gray-500 text-base duration-300 transform -translate-y-6 scale-90 top-3 left-4 z-10 origin-[0]
-                 bg-white px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:left-4
-                 peer-focus:scale-90 peer-focus:-translate-y-6 peer-focus:left-4 select-none"
+          class="absolute text-gray-500 text-base duration-300 transform -translate-y-6 scale-90 top-3 left-4 z-10 origin-[0] bg-white px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:left-4 peer-focus:scale-90 peer-focus:-translate-y-6 peer-focus:left-4 select-none"
           >Confirm Password</label
         >
         <div
           *ngIf="
-            (confirmPassword.dirty || confirmPassword.touched) && !passwordsMatch(registerForm)
+            (confirmPassword.dirty || confirmPassword.touched) &&
+            !passwordsMatch(registerForm)
           "
           class="text-red-600 mt-1 text-sm font-semibold"
         >
@@ -213,12 +189,11 @@
         <button
           type="submit"
           [disabled]="
-            registerForm.invalid || !passwordsMatch(registerForm) || isSubmitting
+            registerForm.invalid ||
+            !passwordsMatch(registerForm) ||
+            isSubmitting
           "
-          class="w-full py-4 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500
-                 text-white text-lg font-extrabold shadow-lg transform transition duration-300
-                 hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-yellow-300
-                 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center"
+          class="w-full py-4 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500 text-white text-lg font-extrabold shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-yellow-300 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center"
         >
           <svg
             *ngIf="isSubmitting"
@@ -254,7 +229,7 @@
         class="text-yellow-500 hover:underline transition"
         >Are you a writer? Click here.</a
       >
-      <a href ="/login" class="text-yellow-500 hover:underline transition"
+      <a href="/login" class="text-yellow-500 hover:underline transition"
         >Already have an existing account? Login.</a
       >
     </div>

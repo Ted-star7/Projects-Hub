@@ -1,0 +1,58 @@
+/* sidebar.component.css */
+.sidebar-item {
+  transition: all 0.2s ease;
+}
+
+.sidebar-item:hover {
+  transform: translateX(4px);
+}
+
+.router-link-active {
+  background-color: rgba(31, 41, 55, 0.8);
+  color: #f59e0b;
+  border-left: 4px solid #f59e0b;
+}
+/* Sidebar animation */
+.-translate-x-full {
+  transform: translateX(-100%);
+}
+
+/* Sidebar item styles */
+.sidebar-item {
+  transition: all 0.2s ease;
+}
+
+/* Dropdown chevron animation */
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Ensure sidebar is above content */
+.z-50 {
+  z-index: 50;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+@media (max-width: 767px) {
+  aside {
+    height: 500dvh !important;
+    /* transform: translateX(-100%);
+    transition: transform 0.3s ease; */
+  }}

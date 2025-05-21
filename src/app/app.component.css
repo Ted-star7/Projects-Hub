@@ -1,0 +1,36 @@
+/* Main content structure */
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 96px; /* Matches navbar height */
+  transition: margin-left 0.3s ease;
+}
+
+.content-inner {
+  flex: 1;
+  padding: 1.5rem; /* Adjust as needed */
+  overflow-y: auto;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .content-wrapper {
+    margin-top: 60px; /* Slightly less on mobile */
+    margin-left: 0;
+  }
+}
+
+/* Desktop adjustments */
+@media (min-width: 768px) {
+  .content-wrapper {
+    margin-left: 16rem; /* Matches sidebar width */
+  }
+}
+
+/* Ensure navbar doesn't cover content */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

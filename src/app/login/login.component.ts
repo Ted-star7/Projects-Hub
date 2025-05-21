@@ -39,8 +39,7 @@ export class LoginComponent {
       password: form.value.password,
     };
 
-    this.servicesService
-      .postRequest('/api/open/users/login', payload, null) // Adjust endpoint if needed
+    this.servicesService.postRequest('/api/open/users/login', payload, null) 
       .pipe(
         catchError((error) => {
           this.serverError = error.message || 'Login failed.';
@@ -61,7 +60,7 @@ export class LoginComponent {
           }
 
           setTimeout(() => {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/']);
           }, 1500);
         } else {
           alert('Unexpected server response.');

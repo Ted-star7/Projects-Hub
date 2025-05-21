@@ -1,0 +1,127 @@
+<aside class="w-64 h-screen bg-gradient-to-b from-gray-50 to-gray-100 text-gray-800 fixed left-0 top-0 overflow-y-auto shadow-lg z-40 border-r border-gray-200 transition-transform duration-300"
+       [class.-translate-x-full]="isMobileView && !isSidebarOpen">
+  
+  <!-- Branding -->
+  <div class="flex items-center p-6 border-b border-gray-200 h-[80px]">
+    <img src="/assets/logo.jpg" alt="Logo" class="w-8 h-8 mr-3"/>
+    <h1 class="text-4xl font-bold text-gray-900 tracking-tight">
+      Script<span class="text-yellow-500">Hive</span>
+    </h1>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="p-4 space-y-1">
+    <!-- Dashboard -->
+    <a
+      routerLink="/dashboard"
+      routerLinkActive="bg-yellow-50 text-yellow-600 border-l-4 border-yellow-500"
+      class="flex items-center p-3 rounded-lg sidebar-item hover:bg-yellow-50 hover:text-yellow-600 transition-all"
+    >
+      <i class="fas fa-tachometer-alt w-6 text-center mr-3"></i>
+      <span>Dashboard</span>
+    </a>
+
+    <!-- Orders Dropdown -->
+    <div class="mb-2">
+      <button
+        (click)="toggleDropdown('orders')"
+        class="flex items-center justify-between w-full p-3 rounded-lg sidebar-item hover:bg-yellow-50 hover:text-yellow-600 transition-all"
+      >
+        <div class="flex items-center">
+          <i class="fas fa-file-alt w-6 text-center mr-3"></i>
+          <span>Orders</span>
+        </div>
+        <i
+          class="fas fa-chevron-down text-xs transition-transform duration-200"
+          [class.rotate-180]="dropdowns.orders"
+        ></i>
+      </button>
+
+      <div *ngIf="dropdowns.orders" class="ml-8 mt-1 space-y-1">
+        <div
+          *ngFor="let order of orderTypes"
+          class="flex justify-between items-center p-2 text-sm hover:bg-yellow-50 rounded"
+        >
+          <span>{{ order.name }}</span>
+          <div class="text-right">
+            <div class="font-medium">KES {{ order.amount }}</div>
+            <div class="text-xs text-gray-500">{{ order.count }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Writers Dropdown -->
+    <div class="mb-2">
+      <button
+        (click)="toggleDropdown('writers')"
+        class="flex items-center justify-between w-full p-3 rounded-lg sidebar-item hover:bg-yellow-50 hover:text-yellow-600 transition-all"
+      >
+        <div class="flex items-center">
+          <i class="fas fa-users w-6 text-center mr-3"></i>
+          <span>Writers</span>
+        </div>
+        <i
+          class="fas fa-chevron-down text-xs transition-transform duration-200"
+          [class.rotate-180]="dropdowns.writers"
+        ></i>
+      </button>
+
+      <div *ngIf="dropdowns.writers" class="ml-8 mt-1 space-y-1">
+        <a
+          *ngFor="let writer of writerTypes"
+          routerLink="/writers/{{ writer.type }}"
+          routerLinkActive="bg-yellow-50 text-yellow-600"
+          class="flex justify-between items-center p-2 text-sm hover:bg-yellow-50 rounded"
+        >
+          <span>{{ writer.name }}</span>
+          <div class="text-right">
+            <div class="font-medium">KES {{ writer.amount }}</div>
+            <div class="text-xs text-gray-500">{{ writer.count }}</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Top Writers -->
+    <a
+      routerLink="/top-writers"
+      routerLinkActive="bg-yellow-50 text-yellow-600 border-l-4 border-yellow-500"
+      class="flex items-center p-3 rounded-lg sidebar-item hover:bg-yellow-50 hover:text-yellow-600 transition-all"
+    >
+      <div
+        class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center mr-3"
+      >
+        <i class="fas fa-crown text-xs text-white"></i>
+      </div>
+      <span class="font-medium">Top Writers</span>
+    </a>
+
+    <!-- Chat -->
+    <a
+      routerLink="/chat"
+      routerLinkActive="bg-yellow-50 text-yellow-600 border-l-4 border-yellow-500"
+      class="flex items-center p-3 rounded-lg sidebar-item hover:bg-yellow-50 hover:text-yellow-600 transition-all"
+    >
+      <i class="fas fa-comments w-6 text-center mr-3"></i>
+      <span>Chat</span>
+      <span
+        class="ml-auto bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full"
+        >3</span
+      >
+    </a>
+
+    <!-- Accounts -->
+    <a
+      routerLink="/accounts"
+      routerLinkActive="bg-yellow-50 text-yellow-600 border-l-4 border-yellow-500"
+      class="flex items-center justify-between p-3 rounded-lg sidebar-item hover:bg-yellow-50 hover:text-yellow-600 transition-all"
+    >
+      <div class="flex items-center">
+        <i class="fas fa-wallet w-6 text-center mr-3"></i>
+        <span>Accounts</span>
+      </div>
+      <i class="fas fa-chevron-right text-xs"></i>
+    </a>
+  </nav>
+</aside>

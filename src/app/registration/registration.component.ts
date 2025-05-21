@@ -65,7 +65,7 @@ export class RegistrationComponent {
       .subscribe((response) => {
         if (response?.status === 'success' || response?.message) {
           alert(response.message || 'Registration successful! Redirecting to login...');
-          // Save token/email/userId if available in response.body
+          
           if (response.body) {
             if (response.body.token) this.sessionService.saveToken(response.body.token);
             if (response.body.email) this.sessionService.saveEmail(response.body.email);

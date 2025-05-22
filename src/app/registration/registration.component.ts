@@ -70,6 +70,7 @@ export class RegistrationComponent {
             if (response.body.token) this.sessionService.saveToken(response.body.token);
             if (response.body.email) this.sessionService.saveEmail(response.body.email);
             if (response.body.userId) this.sessionService.saveUserId(response.body.userId);
+            if (response.body.fullName) this.sessionService.savefullName(response.body.fullName);
           }
 
           setTimeout(() => {

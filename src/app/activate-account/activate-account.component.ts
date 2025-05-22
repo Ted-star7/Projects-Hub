@@ -62,29 +62,41 @@ export class ActivateAccountComponent implements OnInit {
     }
   }
 
-  fetchUserPhoneNumber(token: string): void {
-    this.isLoading = true;
-    
-    this.servicesService.getRequest(`/api/phone/${this.userId}`, token).subscribe({
-      next: (response) => {
-        if (response.phoneNumber) {
-          // Remove country code if present and store the last 9 digits
-          const phone = response.phoneNumber.replace(/^\+?254/, '');
-          this.originalPhoneNumber = phone;
-          this.phoneForm.patchValue({ phone });
+ fetchUserPhoneNumber(token: string): void {
+  this.isLoading = true;
+
+  this.servicesService.getRequest(`/api/phone/${this.userId}`, token).subscribe({
+    next: (response) => {
+      if (response.body) {
+        const raw = response.body.toString().replace(/\D/g, ''); // remove non-digits
+        let phone = raw;
+
+        // Normalize to 9-digit format
+        if (raw.length === 12 && raw.startsWith('254')) {
+          phone = raw.slice(3);
+        } else if (raw.length === 13 && raw.startsWith('254')) {
+          phone = raw.slice(3); // in case there's an accidental leading "0" after 254
+        } else if (raw.length === 10 && raw.startsWith('0')) {
+          phone = raw.slice(1);
         }
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Error fetching phone number:', error);
-        this.snackBar.open('Failed to fetch phone number', 'Close', {
-          duration: 3000,
-          panelClass: ['error-snackbar']
-        });
-        this.isLoading = false;
+
+        this.originalPhoneNumber = phone;
+        this.phoneForm.patchValue({ phone });
       }
-    });
-  }
+      this.isLoading = false;
+    },
+    error: (error) => {
+      console.error('Error fetching phone number:', error);
+      this.snackBar.open('Failed to fetch phone number', 'Close', {
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
+      this.isLoading = false;
+    }
+  });
+}
+
+
 
   initiatePayment(): void {
     if (this.phoneForm.invalid) {

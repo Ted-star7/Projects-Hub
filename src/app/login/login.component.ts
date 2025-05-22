@@ -12,7 +12,7 @@ import { NgFor, NgIf } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [FormsModule, NgIf], 
+  imports: [FormsModule, NgIf],
 })
 export class LoginComponent {
   isSubmitting = false;
@@ -39,7 +39,8 @@ export class LoginComponent {
       password: form.value.password,
     };
 
-    this.servicesService.postRequest('/api/open/users/login', payload, null) 
+    this.servicesService
+      .postRequest('/api/open/users/login', payload, null)
       .pipe(
         catchError((error) => {
           this.serverError = error.message || 'Login failed.';
@@ -54,13 +55,18 @@ export class LoginComponent {
         if (response?.status === 'success') {
           alert('Login successful! Redirecting to dashboard...');
           if (response.body) {
-            if (response.body.token) this.sessionService.saveToken(response.body.token);
-            if (response.body.email) this.sessionService.saveEmail(response.body.email);
-            if (response.body.userId) this.sessionService.saveUserId(response.body.userId);
+            if (response.body.token)
+              this.sessionService.saveToken(response.body.token);
+            if (response.body.email)
+              this.sessionService.saveEmail(response.body.email);
+            if (response.body.userId)
+              this.sessionService.saveUserId(response.body.userId);
+            if (response.body.fullName)
+              this.sessionService.savefullName(response.body.fullName);
           }
 
           setTimeout(() => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/dashboard']);
           }, 1500);
         } else {
           alert('Unexpected server response.');

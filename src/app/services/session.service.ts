@@ -15,6 +15,14 @@ export class SessionService {
     }
   }
 
+   public savefullName(fullName: string): void {
+    try {
+      sessionStorage.setItem('fullName', fullName);
+    } catch (error) {
+      console.error('Error saving Fullname in session storage:', error);
+    }
+  }
+
   public saveEmail(email: string): void{
     try{
       sessionStorage.setItem('email',email);
@@ -43,7 +51,9 @@ export class SessionService {
   public gettoken(): string| null{
     return sessionStorage.getItem('token');
   }
-
+   public getfullName(): string| null{
+    return sessionStorage.getItem('fullName');
+  }
  
 
   public deleteSessions(): void{

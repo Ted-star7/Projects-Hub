@@ -1,9 +1,10 @@
-<aside class="w-64 h-screen bg-gradient-to-b from-gray-50 to-gray-100 text-gray-800 fixed left-0 top-0 overflow-y-auto shadow-lg z-40 border-r border-gray-200 transition-transform duration-300"
-       [class.-translate-x-full]="isMobileView && !isSidebarOpen">
-  
+<aside
+  class="w-64 h-screen bg-gradient-to-b from-gray-50 to-gray-100 text-gray-800 fixed left-0 top-0 overflow-y-auto shadow-lg z-40 border-r border-gray-200 transition-transform duration-300"
+  [class.-translate-x-full]="isMobileView && !isSidebarOpen"
+>
   <!-- Branding -->
   <div class="flex items-center p-6 border-b border-gray-200 h-[80px]">
-    <img src="/assets/logo.jpg" alt="Logo" class="w-8 h-8 mr-3"/>
+    <img src="/assets/logo.jpg" alt="Logo" class="w-8 h-8 mr-3" />
     <h1 class="text-4xl font-bold text-gray-900 tracking-tight">
       Script<span class="text-yellow-500">Hive</span>
     </h1>
@@ -105,6 +106,19 @@
     >
       <i class="fas fa-comments w-6 text-center mr-3"></i>
       <span>Chat</span>
+      <span
+        class="ml-auto bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full"
+        >3</span
+      >
+    </a>
+
+    <a
+      routerLink="/profile"
+      routerLinkActive="bg-yellow-50 text-yellow-600 border-l-4 border-yellow-500"
+      class="flex items-center p-3 rounded-lg sidebar-item hover:bg-yellow-50 hover:text-yellow-600 transition-all"
+    >
+      <i class="fas fa-comments w-6 text-center mr-3"></i>
+      <span>Profile</span>
       <span
         class="ml-auto bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full"
         >3</span

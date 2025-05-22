@@ -14,3 +14,31 @@ header {
     width: calc(100% - 16rem);
   }
 }
+
+/* Dropdown animations */
+.dropdown-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.dropdown-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.2s ease-out;
+}
+
+.dropdown-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.2s ease-in;
+}
+
+/* Prevent body scrolling when dropdown is open */
+body.dropdown-open {
+  overflow: hidden;
+}

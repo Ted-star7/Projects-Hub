@@ -3,32 +3,34 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-top: 96px; /* Matches navbar height */
-  transition: margin-left 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .content-inner {
   flex: 1;
-  padding: 1.5rem; /* Adjust as needed */
+  padding: 1.5rem;
   overflow-y: auto;
 }
 
 /* Mobile adjustments */
 @media (max-width: 767px) {
   .content-wrapper {
-    margin-top: 60px; /* Slightly less on mobile */
-    margin-left: 0;
+    margin-left: 0 !important; /* Force no sidebar spacing on mobile */
+  }
+  
+  .content-wrapper:not([class*="mt-0"]) {
+    margin-top: 60px; /* Only apply when navbar is visible */
   }
 }
 
 /* Desktop adjustments */
 @media (min-width: 768px) {
-  .content-wrapper {
-    margin-left: 16rem; /* Matches sidebar width */
+  .content-wrapper:not([class*="mt-0"]) {
+    margin-top: 96px; /* Only apply when navbar is visible */
   }
 }
 
-/* Ensure navbar doesn't cover content */
+/* Base layout */
 :host {
   display: flex;
   flex-direction: column;

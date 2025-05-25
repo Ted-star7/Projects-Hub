@@ -6,13 +6,14 @@ import { SessionService } from '../services/session.service';
 import { catchError, finalize } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { NgIf } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
   standalone: true,
-  imports: [FormsModule, NgIf],  
+  imports: [FormsModule, NgIf, RouterModule],  
 })
 export class RegistrationComponent {
   isSubmitting = false;
@@ -64,7 +65,7 @@ export class RegistrationComponent {
       )
       .subscribe((response) => {
         if (response?.status === 'success' || response?.message) {
-          alert(response.message || 'Registration successful! Redirecting to login...');
+          alert(response.message || 'Registration successful! Redirecting to activate-account...');
           
           if (response.body) {
             if (response.body.token) this.sessionService.saveToken(response.body.token);
@@ -74,7 +75,7 @@ export class RegistrationComponent {
           }
 
           setTimeout(() => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/activate-account']);
           }, 1800);
           form.resetForm();
         } else {

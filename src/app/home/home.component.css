@@ -1065,27 +1065,31 @@ body {
 }
 
 /* CTA Section */
+/* === CTA SECTION === */
 .cta-section {
-  padding: 5rem 1.5rem;
-  background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+  padding: 5rem 1rem;
+  background: linear-gradient(to right, #f2b035, #f29d35);
+  width: 100%;
 }
 
 .cta-container {
-  max-width: 56rem;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .cta-title {
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: var(--light-color);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
   margin-bottom: 1.5rem;
 }
 
 .cta-description {
   font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 2.5rem;
 }
 
@@ -1094,6 +1098,7 @@ body {
   flex-direction: column;
   gap: 1rem;
   justify-content: center;
+  align-items: center;
 }
 
 @media (min-width: 640px) {
@@ -1103,80 +1108,97 @@ body {
 }
 
 .cta-primary-btn {
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 2.25rem;
   border-radius: 9999px;
-  background-color: var(--light-color);
-  color: var(--primary-color);
+  background-color: white;
+  color: #f2b035;
   font-weight: 600;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  cursor: pointer;
   border: none;
 }
 
 .cta-primary-btn:hover {
-  box-shadow: var(--shadow-xl);
-  transform: translateY(-0.25rem);
+  background-color: #fff6e6;
+  transform: translateY(-2px);
 }
 
 .cta-secondary-btn {
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 2.25rem;
   border-radius: 9999px;
-  border: 2px solid var(--light-color);
-  color: var(--light-color);
+  border: 2px solid white;
+  color: white;
   font-weight: 600;
   background-color: transparent;
   transition: all 0.3s ease;
-  cursor: pointer;
 }
 
 .cta-secondary-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Footer */
+/* === FOOTER === */
 .footer {
   background-color: #121433;
-  color: var(--light-color);
-  padding: 3rem 1.5rem;
+  color: white;
+  padding: 3rem 1rem;
+  width: 100%;
 }
 
 .footer-container {
-  max-width: 80rem;
+  width: 100%;
   margin: 0 auto;
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.5rem;
   margin-bottom: 3rem;
-}
-
-@media (min-width: 768px) {
-  .footer-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
 .footer-logo {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-img {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.logo-text {
+  font-weight: 800;
+  font-size: 1.5rem;
+  background: linear-gradient(to right, #f2c12e, #f29d35);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .footer-about {
-  color: rgba(156, 163, 175, 0.9);
-  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
 }
 
 .footer-title {
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .links-list {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .links-list li {
@@ -1184,46 +1206,47 @@ body {
 }
 
 .footer-link {
-  color: rgba(156, 163, 175, 0.9);
-  transition: color 0.3s ease;
-  cursor: pointer;
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
-  display: inline-block;
+  transition: color 0.3s ease;
 }
 
 .footer-link:hover {
-  color: var(--light-color);
+  color: white;
 }
 
 .social-icons {
   display: flex;
   gap: 1rem;
+  margin-top: 0.5rem;
 }
 
 .social-icon {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: 50%;
-  background-color: rgba(242, 176, 53, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--primary-color);
+  color: #f2b035;
   transition: all 0.3s ease;
-  text-decoration: none;
+  font-size: 1rem;
 }
 
 .social-icon:hover {
-  background-color: var(--primary-color);
-  color: var(--light-color);
+  background-color: #f2b035;
+  color: white;
 }
 
-.footer-copyright {
-  border-top: 1px solid rgba(55, 65, 81, 0.5);
-  padding-top: 2rem;
+.footer-bottom {
   text-align: center;
-  color: rgba(156, 163, 175, 0.9);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 2rem;
 }
+
 
 /* Animation Classes */
 .animate-fade-in {

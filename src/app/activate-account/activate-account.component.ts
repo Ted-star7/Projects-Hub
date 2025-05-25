@@ -134,7 +134,7 @@ initiatePayment(): void {
         });
 
         setTimeout(() => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/login']);
         }, 3000);
       } else {
         this.snackBar.open(response.customerMessage || 'Payment initiation failed', 'Close', {

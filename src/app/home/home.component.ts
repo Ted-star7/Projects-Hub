@@ -1,4 +1,6 @@
 import { NgFor, NgIf, isPlatformBrowser } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { faComments } from '@fortawesome/free-solid-svg-icons';
 import {
   Component,
   ElementRef,
@@ -28,6 +30,7 @@ import {
   faPlay,
   faBars,
   faStar,
+  // faComments,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faTwitter,
@@ -37,31 +40,31 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
-
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, NgIf, FontAwesomeModule],
+  imports: [NgFor, NgIf, FontAwesomeModule,  RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'], // Ensure this path is correct
-  encapsulation: ViewEncapsulation.None // Add this
+  encapsulation: ViewEncapsulation.None, // Add this
 })
-
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+  
   @ViewChild('threejsBackground') threejsBackground!: ElementRef;
 
   mobileMenuOpen = false;
   showRegistrationPopup = false;
   currentYear = new Date().getFullYear();
   isBrowser: boolean;
+    
 
   navItems = [
     { id: 'hero', label: 'Home' },
-    { id: 'try', label: 'Try It Out' },
-    { id: 'features', label: 'Features' },
-    { id: 'how', label: 'How It Works' },
-    { id: 'untrusted', label: 'Untrusted List' },
-    { id: 'testimonials', label: 'Testimonials' },
+    { id: 'try', label: 'Live Demo' },
+    { id: 'features', label: 'Platform Features' },
+    { id: 'how', label: 'Workflow' },
+    { id: 'untrusted', label: 'Flagged Writers' },
+    { id: 'testimonials', label: 'User Reviews' },
   ];
 
   features = [
@@ -84,11 +87,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         'Assign, reassign, and track order progress with real-time notifications.',
     },
     {
-      icon: 'search',
-      title: 'Plagiarism Check',
+      icon: 'headset',
+      title: 'Live Messaging',
       description:
-        'Built-in plagiarism detection ensures all work is original and properly cited.',
+        'Chat in real time with writers or clients to clarify instructions or discuss changes.',
     },
+
     {
       icon: 'headset',
       title: '24/7 Support',
@@ -151,13 +155,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   testimonials = [
     {
-      name: 'Jane M.',
-      role: 'University of Nairobi',
+      name: 'Rayson Baraka',
+      role: 'KCA University',
       quote:
         'ScriptHive helped me meet my deadline with zero stress. The writer was professional and responsive throughout the entire process!',
     },
     {
-      name: 'Brian K.',
+      name: 'Faith C.',
       role: 'Freelance Academic Writer',
       quote:
         'As a freelance writer, ScriptHive provides me with steady gigs and a smooth payment process. The platform is easy to use and the support team is fantastic.',
@@ -231,7 +235,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-    openRegistrationPopup(): void {
+  openRegistrationPopup(): void {
     this.showRegistrationPopup = true;
   }
 

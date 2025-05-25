@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ServicesService } from '../services/consume.service';
 import { SessionService } from '../services/session.service';
 import { catchError, finalize } from 'rxjs/operators';
@@ -12,7 +13,7 @@ import { NgFor, NgIf } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgIf, RouterModule],
 })
 export class LoginComponent {
   isSubmitting = false;

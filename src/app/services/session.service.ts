@@ -1,69 +1,82 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SessionService {
+  private isBrowser: boolean;
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   public saveToken(token: string): void {
-    try {
-      sessionStorage.setItem('token', token);
-    } catch (error) {
-      console.error('Error saving token in session storage:', error);
+    if (this.isBrowser) {
+      try {
+        sessionStorage.setItem('token', token);
+      } catch (error) {
+        console.error('Error saving token in session storage:', error);
+      }
     }
   }
 
-   public savefullName(fullName: string): void {
-    try {
-      sessionStorage.setItem('fullName', fullName);
-    } catch (error) {
-      console.error('Error saving Fullname in session storage:', error);
+  public savefullName(fullName: string): void {
+    if (this.isBrowser) {
+      try {
+        sessionStorage.setItem('fullName', fullName);
+      } catch (error) {
+        console.error('Error saving Fullname in session storage:', error);
+      }
     }
   }
 
-  public saveEmail(email: string): void{
-    try{
-      sessionStorage.setItem('email',email);
-    }catch (error){
-      console.error('Error saving email in session storage:', error);
+  public saveEmail(email: string): void {
+    if (this.isBrowser) {
+      try {
+        sessionStorage.setItem('email', email);
+      } catch (error) {
+        console.error('Error saving email in session storage:', error);
+      }
     }
   }
 
   public saveUserId(userId: string): void {
-    try {
-      sessionStorage.setItem('userId', userId);
-    } catch (error) {
-      console.error('Error saving userId in session storage:', error);
+    if (this.isBrowser) {
+      try {
+        sessionStorage.setItem('userId', userId);
+      } catch (error) {
+        console.error('Error saving userId in session storage:', error);
+      }
     }
   }
 
-
-
-  public getemail(): string| null{
-    return sessionStorage.getItem('email');
+  public getemail(): string | null {
+    return this.isBrowser ? sessionStorage.getItem('email') : null;
   }
+
   public getUserId(): string | null {
-    return sessionStorage.getItem('userId');
+    return this.isBrowser ? sessionStorage.getItem('userId') : null;
   }
 
-  public gettoken(): string| null{
-    return sessionStorage.getItem('token');
-  }
-   public getfullName(): string| null{
-    return sessionStorage.getItem('fullName');
-  }
- 
-
-  public deleteSessions(): void{
-    sessionStorage.removeItem('email');
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('userId');
-   
+  public gettoken(): string | null {
+    return this.isBrowser ? sessionStorage.getItem('token') : null;
   }
 
-  public isLoggedIn(): boolean{
-    return !! this.gettoken();
+  public getfullName(): string | null {
+    return this.isBrowser ? sessionStorage.getItem('fullName') : null;
+  }
+
+  public deleteSessions(): void {
+    if (this.isBrowser) {
+      sessionStorage.removeItem('email');
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('userId');
+      sessionStorage.removeItem('fullName');
+    }
+  }
+
+  public isLoggedIn(): boolean {
+    return this.isBrowser && !!this.gettoken();
   }
 }

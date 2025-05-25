@@ -97,49 +97,62 @@ export class ActivateAccountComponent implements OnInit {
 }
 
 
+initiatePayment(): void {
+  if (this.phoneForm.invalid) {
+    this.snackBar.open('Please enter a valid phone number (9 digits without country code)', 'Close', {
+      duration: 3000,
+      panelClass: ['error-snackbar']
+    });
+    return;
+  }
 
-  initiatePayment(): void {
-    if (this.phoneForm.invalid) {
-      this.snackBar.open('Please enter a valid phone number (9 digits without country code)', 'Close', {
-        duration: 3000,
-        panelClass: ['error-snackbar']
-      });
-      return;
-    }
+  if (!this.userId) {
+    this.snackBar.open('User ID is missing. Please login again.', 'Close', {
+      duration: 3000,
+      panelClass: ['error-snackbar']
+    });
+    return;
+  }
 
-    this.isLoading = true;
-    const phoneNumber = `254${this.phoneForm.value.phone}`; // Add country code
-    
-    this.servicesService.postRequest('/api/open/payment/initiate', { phoneNumber }, null).subscribe({
-      next: (response) => {
-        this.isLoading = false;
-        if (response.responseCode === '0') {
-          this.snackBar.open('Payment initiated successfully! Check your phone for STK push', 'Close', {
-            duration: 5000,
-            panelClass: ['success-snackbar']
-          });
-          
-          // Redirect to dashboard after a short delay
-          setTimeout(() => {
-            this.router.navigate(['/dashboard']);
-          }, 3000);
-        } else {
-          this.snackBar.open(response.customerMessage || 'Payment initiation failed', 'Close', {
-            duration: 5000,
-            panelClass: ['error-snackbar']
-          });
-        }
-      },
-      error: (error) => {
-        this.isLoading = false;
-        console.error('Payment initiation error:', error);
-        this.snackBar.open('Failed to initiate payment. Please try again.', 'Close', {
+  this.isLoading = true;
+  const phoneNumber = `254${this.phoneForm.value.phone}`; // Add country code
+  const paymentMode = 'MPESA'; // You can make this dynamic later if needed
+
+  // Append userId as query parameter
+  const url = `/api/open/payment/initiate?userId=${this.userId}`;
+
+  // Request body per API spec
+  const body = { phoneNumber, paymentMode };
+
+  this.servicesService.postRequest(url, body, null).subscribe({
+    next: (response) => {
+      this.isLoading = false;
+      if (response.responseCode === '0') {
+        this.snackBar.open('Payment initiated successfully! Check your phone for STK push', 'Close', {
+          duration: 5000,
+          panelClass: ['success-snackbar']
+        });
+
+        setTimeout(() => {
+          this.router.navigate(['/dashboard']);
+        }, 3000);
+      } else {
+        this.snackBar.open(response.customerMessage || 'Payment initiation failed', 'Close', {
           duration: 5000,
           panelClass: ['error-snackbar']
         });
       }
-    });
-  }
+    },
+    error: (error) => {
+      this.isLoading = false;
+      console.error('Payment initiation error:', error);
+      this.snackBar.open('Failed to initiate payment. Please try again.', 'Close', {
+        duration: 5000,
+        panelClass: ['error-snackbar']
+      });
+    }
+  });
+}
 
   toggleEdit(): void {
     this.isEditing = !this.isEditing;

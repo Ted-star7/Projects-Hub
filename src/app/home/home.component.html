@@ -1,1 +1,427 @@
-<p>home works!</p>
+<!-- 3D Animated Navbar -->
+<header class="header">
+  <nav class="nav-container">
+    <div class="nav-content">
+      <!-- Logo with 3D hover effect -->
+      <div class="logo-container" (click)="scrollTo('hero')">
+        <div class="logo-circle">
+          <img alt="ScriptHive logo" class="logo-img" src="assets/logo.jpg" />
+        </div>
+        <span class="logo-text">ScriptHive</span>
+      </div>
+
+      <!-- Desktop Menu with 3D underline effect -->
+      <div class="desktop-menu">
+        <a
+          *ngFor="let item of navItems"
+          class="menu-item"
+          (click)="scrollTo(item.id)"
+        >
+          {{ item.label }}
+          <span class="menu-underline"></span>
+        </a>
+      </div>
+
+      <!-- Auth Buttons with 3D depth -->
+      <div class="auth-buttons">
+        <button class="register-btn" (click)="openRegistrationPopup()">
+          <span class="btn-text">Register</span>
+          <span class="btn-hover"></span>
+        </button>
+       <a href="/login" class="login-btn">
+  Login
+</a>
+
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" (click)="toggleMobileMenu()">
+        <fa-icon [icon]="['fas', 'bars']" class="menu-icon"></fa-icon>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      class="mobile-menu"
+      [class.mobile-menu-open]="mobileMenuOpen"
+      [class.mobile-menu-closed]="!mobileMenuOpen"
+    >
+      <div class="mobile-menu-content">
+        <a
+          *ngFor="let item of navItems"
+          class="mobile-menu-item"
+          (click)="scrollTo(item.id); toggleMobileMenu()"
+        >
+          {{ item.label }}
+        </a>
+        <div class="mobile-auth-buttons">
+          <button class="mobile-register-btn" (click)="openRegistrationPopup()">
+            Register
+          </button>
+          <button class="mobile-login-btn">
+            Login
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Registration Popup -->
+<div class="registration-popup" *ngIf="showRegistrationPopup">
+  <div class="popup-overlay" (click)="closeRegistrationPopup()"></div>
+  <div class="popup-content">
+    <button class="popup-close-btn" (click)="closeRegistrationPopup()">
+      &times;
+    </button>
+    <h3 class="popup-title">Register As</h3>
+    <div class="popup-options">
+      <a href="/registration" class="popup-option employer-option">
+        <div class="option-icon">
+          <fa-icon [icon]="['fas', 'user-tie']"></fa-icon>
+        </div>
+        <h4>Employer</h4>
+        <p>I need to hire writers for my projects</p>
+      </a>
+      <a href="/register/writer" class="popup-option writer-option">
+        <div class="option-icon">
+          <fa-icon [icon]="['fas', 'pen-fancy']"></fa-icon>
+        </div>
+        <h4>Writer</h4>
+        <p>I want to offer my writing services</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<main class="main-content">
+  <!-- Hero Section with 3D Background -->
+  <section
+    id="hero"
+    class="hero-section"
+  >
+    <!-- 3D Animated Background -->
+    <div #threejsBackground class="threejs-background"></div>
+
+    <!-- Content -->
+    <div class="hero-container">
+      <!-- 3D Animated Card -->
+      <div class="hero-card-container">
+        <div class="hero-card">
+          <div class="card-front">
+            <img
+              class="card-image"
+              src="https://storage.googleapis.com/a1aa/image/dae68de4-ce02-43fb-869f-e8c5df7b97c2.jpg"
+              alt="Hero"
+            />
+          </div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+
+      <div class="hero-text">
+        <h1 class="hero-title">
+          Empower Your
+          <span class="gradient-text">Academic Journey</span>
+        </h1>
+        <p class="hero-description">
+          ScriptHive is your trusted writing partner — a digital marketplace
+          connecting students to professional academic writers with built-in
+          plagiarism checks and secure payments.
+        </p>
+        <div class="hero-buttons">
+          <button class="primary-btn">
+            <span class="btn-text">Get Started</span>
+            <span class="btn-hover"></span>
+          </button>
+          <button class="secondary-btn">
+            Learn More
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <div class="indicator-container">
+        <div class="indicator-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Try It Out Section -->
+  <section id="try" class="try-section">
+    <div class="try-container">
+      <h2 class="section-title">
+        <span class="gradient-text">Try It Out</span>
+      </h2>
+      <p class="section-description">
+        Experience our platform with a no-risk demo. Post sample orders, assign
+        writers, and simulate payments in seconds.
+      </p>
+
+      <!-- Interactive Demo Card -->
+      <div class="demo-card">
+        <div class="demo-content">
+          <div class="demo-icon-container">
+            <fa-icon [icon]="['fas', 'play']"></fa-icon>
+          </div>
+          <div class="demo-text">
+            <h3 class="demo-title">
+              Interactive Demo
+            </h3>
+            <p class="demo-description">
+              Click below to launch our interactive demo environment
+            </p>
+          </div>
+        </div>
+        <button class="demo-btn">
+          Launch Demo
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features-section">
+    <div class="features-container">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="gradient-text">Platform Features</span>
+        </h2>
+        <p class="section-description">
+          Designed to provide the best experience for both students and writers
+        </p>
+      </div>
+
+      <!-- Feature Cards -->
+      <div class="features-grid">
+        <div
+          *ngFor="let feature of features"
+          class="feature-card"
+        >
+          <div class="feature-icon-container">
+            <fa-icon [icon]="['fas', feature.icon]"></fa-icon>
+          </div>
+          <h3 class="feature-title">
+            {{ feature.title }}
+          </h3>
+          <p class="feature-description">{{ feature.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how" class="how-section">
+    <div class="how-container">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="gradient-text">How It Works</span>
+        </h2>
+        <p class="section-description">
+          Simple steps to get your academic work done stress-free
+        </p>
+      </div>
+
+      <!-- Process Steps -->
+      <div class="process-steps">
+        <!-- Timeline -->
+        <div class="process-timeline"></div>
+
+        <div class="steps-grid">
+          <div
+            *ngFor="let step of steps; let i = index"
+            class="step-container"
+          >
+            <!-- Step Number -->
+            <div class="step-number">
+              {{ i + 1 }}
+            </div>
+
+            <!-- Content -->
+            <div class="step-content">
+              <div class="step-icon-container">
+                <fa-icon [icon]="['fas', step.icon]"></fa-icon>
+              </div>
+              <h3 class="step-title">
+                {{ step.title }}
+              </h3>
+              <p class="step-description">{{ step.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Untrusted List Section -->
+  <section id="untrusted" class="untrusted-section">
+    <div class="untrusted-container">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="gradient-text">Untrusted Writers</span>
+        </h2>
+        <p class="section-description">
+          Our community maintains high standards for quality and reliability
+        </p>
+      </div>
+
+      <!-- Untrusted Writers List -->
+      <div class="untrusted-list">
+        <div class="list-header">
+          <h3 class="list-title">Flagged Writers</h3>
+          <p>These writers have been reported for unprofessional behavior</p>
+        </div>
+        <ul class="writers-list">
+          <li
+            *ngFor="let writer of untrustedWriters"
+            class="writer-item"
+          >
+            <div class="writer-content">
+              <div class="writer-icon-container">
+                <fa-icon [icon]="['fas', 'user-slash']"></fa-icon>
+              </div>
+              <div class="writer-details">
+                <h4 class="writer-name">
+                  {{ writer.name }}
+                </h4>
+                <p class="writer-reason">{{ writer.reason }}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonials-section">
+    <div class="testimonials-container">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="gradient-text">What Our Users Say</span>
+        </h2>
+        <p class="section-description">
+          Trusted by students and writers across universities
+        </p>
+      </div>
+
+      <!-- Testimonial Cards -->
+      <div class="testimonials-grid">
+        <div
+          *ngFor="let testimonial of testimonials"
+          class="testimonial-card"
+        >
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">
+              {{ testimonial.name.charAt(0) }}
+            </div>
+            <div class="testimonial-author">
+              <h4 class="author-name">
+                {{ testimonial.name }}
+              </h4>
+              <p class="author-role">{{ testimonial.role }}</p>
+            </div>
+          </div>
+          <p class="testimonial-quote">"{{ testimonial.quote }}"</p>
+          <div class="testimonial-rating">
+            <fa-icon
+              [icon]="['fas', 'star']"
+              *ngFor="let star of [1, 2, 3, 4, 5]"
+            ></fa-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2 class="cta-title">
+        Ready to Transform Your Academic Experience?
+      </h2>
+      <p class="cta-description">
+        Join thousands of students and writers who trust ScriptHive
+      </p>
+      <div class="cta-buttons">
+        <button class="cta-primary-btn">
+          Get Started Now
+        </button>
+        <button class="cta-secondary-btn">
+          Contact Support
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-logo">
+          <div class="logo-container">
+            <div class="logo-circle">
+              <img alt="ScriptHive logo" class="logo-img" src="assets/logo.jpg" />
+            </div>
+            <span class="logo-text">ScriptHive</span>
+          </div>
+          <p class="footer-about">
+            Empowering academic success through trusted writing partnerships.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="links-list">
+            <li *ngFor="let item of navItems">
+              <a
+                (click)="scrollTo(item.id)"
+                class="footer-link"
+                >{{ item.label }}</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-legal">
+          <h3 class="footer-title">Legal</h3>
+          <ul class="links-list">
+            <li>
+              <a class="footer-link">Terms of Service</a>
+            </li>
+            <li>
+              <a class="footer-link">Privacy Policy</a>
+            </li>
+            <li>
+              <a class="footer-link">Cookie Policy</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-social">
+          <h3 class="footer-title">Connect With Us</h3>
+          <div class="social-icons">
+            <a class="social-icon">
+              <fa-icon [icon]="['fab', 'twitter']"></fa-icon>
+            </a>
+            <a class="social-icon">
+              <fa-icon [icon]="['fab', 'facebook-f']"></fa-icon>
+            </a>
+            <a class="social-icon">
+              <fa-icon [icon]="['fab', 'instagram']"></fa-icon>
+            </a>
+            <a class="social-icon">
+              <fa-icon [icon]="['fab', 'linkedin-in']"></fa-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-copyright">
+        <p>&copy; {{ currentYear }} ScriptHive. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</main>

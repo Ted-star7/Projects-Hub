@@ -17,7 +17,7 @@ export class AppComponent {
   hideSidebar = false;
   isSidebarOpen = false;
   isMobileView = false;
-  protectedRoutes = ['/', '/login', '/resetpassword', '/registration', '/activate-account'];
+  protectedRoutes = ['/', '/login', '/resetpassword', '/registration', '/activate-account', '/order'];
 
   constructor(
     private router: Router,

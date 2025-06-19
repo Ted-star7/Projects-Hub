@@ -20,18 +20,18 @@ export class SidebarComponent {
   };
 
   orderTypes = [
-    { name: 'Completed Orders', amount: 0, count: 0 },
-    { name: 'P Orders', amount: 0, count: 0 },
-    { name: 'Orders In Progress', amount: 0, count: 0 },
-    { name: 'Unconfirmed Orders', amount: 0, count: 0 },
-    { name: 'Submitted Orders', amount: 0, count: 0 },
-    { name: 'Orders in Revision', amount: 0, count: 0 },
-    { name: 'Paid Orders', amount: 0, count: 0 },
-    { name: 'Unpaid Orders', amount: 0, count: 0 },
-    { name: 'Disputed Orders', amount: 0, count: 0 },
-    { name: 'Request / Bid', amount: 0, count: 0 },
-    { name: 'Canceled Orders', amount: 0, count: 0 },
-  ];
+  { name: 'Completed Orders', route: '/orders/completed', icon: 'fas fa-check-circle' },
+  { name: 'Post Orders', route: '/orders/post', icon: 'fas fa-plus-circle' },
+  { name: 'Orders In Progress', route: '/orders/in-progress', icon: 'fas fa-spinner' },
+  { name: 'Unconfirmed Orders', route: '/orders/unconfirmed', icon: 'fas fa-question-circle' },
+  { name: 'Submitted Orders', route: '/orders/submitted', icon: 'fas fa-upload' },
+  { name: 'Orders in Revision', route: '/orders/revision', icon: 'fas fa-edit' },
+  { name: 'Paid Orders', route: '/orders/paid', icon: 'fas fa-dollar-sign' },
+  { name: 'Unpaid Orders', route: '/orders/unpaid', icon: 'fas fa-money-bill-alt' },
+  { name: 'Disputed Orders', route: '/orders/disputed', icon: 'fas fa-exclamation-circle' },
+  { name: 'Request / Bid', route: '/orders/requests', icon: 'fas fa-handshake' }
+];
+
 
   writerTypes = [
     { name: 'Approved Writers', type: 'approved', amount: 0, count: 0 },

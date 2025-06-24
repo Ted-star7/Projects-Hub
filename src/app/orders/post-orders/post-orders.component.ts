@@ -76,6 +76,10 @@ export class PostOrdersComponent {
     }
   }
 
+  ngOnInit() {
+  this.loadDraft();
+}
+
   onSubmit(isDraft: boolean = false) {
     this.isDraft = isDraft;
     if (isDraft) {
@@ -86,18 +90,29 @@ export class PostOrdersComponent {
   }
 
   saveDraft() {
-    // Save to localStorage or your preferred storage
     localStorage.setItem('projectDraft', JSON.stringify(this.formData));
     alert('Draft saved successfully!');
   }
 
-  loadDraft() {
-    const draft = localStorage.getItem('projectDraft');
-    if (draft) {
+hasDraft(): boolean {
+  return !!localStorage.getItem('projectDraft');
+}
+
+// Load draft from localStorage
+loadDraft() {
+  const draft = localStorage.getItem('projectDraft');
+  if (draft) {
+    if (confirm('Load your saved draft? This will overwrite current form data.')) {
       this.formData = JSON.parse(draft);
-     
+      // Determine project type based on loaded data
+      if (this.formData.programmingLanguages || this.formData.framework) {
+        this.projectType = 'software';
+      } else if (this.formData.numberOfPages || this.formData.citationStyle) {
+        this.projectType = 'writing';
+      }
     }
   }
+}
 
   confirmPostProject() {
     this.showPaymentInfoModal = false;

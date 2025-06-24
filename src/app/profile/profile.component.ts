@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
   isLoading = false;
   isEditing = false;
   isSubmitting = false;
-  profilePicture: string = ''; // Changed from string | ArrayBuffer | null to just string
+  profilePicture: string = ''; 
   selectedFile: File | null = null;
 
   // Icons

@@ -11,8 +11,6 @@ export const routes: Routes = [
   { path: 'profile', loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent) },
   { path: 'resetpassword', loadComponent: () => import('./reset-password/reset-password.component').then(m => m.ResetPasswordComponent) },
   { path: 'sidebar', loadComponent: () => import('./sidebar/sidebar.component').then(m => m.SidebarComponent) },
-
-  // 🆕 Orders routes
   {
     path: 'orders',
     children: [

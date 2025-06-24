@@ -1,1 +1,186 @@
-<p>unconfirmed-orders works!</p>
+<div class="bg-gray-50 p-6 min-h-screen">
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-3xl font-bold text-gray-800 mb-8">My Unconfirmed Projects</h1>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="flex justify-center items-center py-12">
+      <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !isLoading" class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm text-red-700">{{ error }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && projects.length === 0 && !error" class="text-center py-12">
+      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <h3 class="mt-2 text-lg font-medium text-gray-900">No unconfirmed projects</h3>
+      <p class="mt-1 text-sm text-gray-500">Get started by posting a new project.</p>
+      <div class="mt-6">
+        <a routerLink="/post-project" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+          Post New Project
+        </a>
+      </div>
+    </div>
+
+    <!-- Project Cards -->
+    <div *ngIf="!isLoading && projects.length > 0" class="grid gap-6">
+      <article *ngFor="let project of projects" class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 p-6 flex flex-col md:grid md:grid-cols-12 gap-6">
+
+        <!-- Edit Form (shown when editing) -->
+        <div *ngIf="isEditing && editingProjectId === project.id" class="md:col-span-12 space-y-4">
+          <h3 class="text-xl font-semibold text-gray-800">Edit Project</h3>
+          <form [formGroup]="editForm" (ngSubmit)="submitEdit()" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Project Title</label>
+                <input formControlName="projectTitle" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Budget (KES)</label>
+                <input formControlName="paymentBudget" type="number" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Due Date</label>
+                <input formControlName="dueDateTime" type="datetime-local" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500">
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Description</label>
+              <textarea formControlName="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500"></textarea>
+            </div>
+            <div class="flex justify-end space-x-3">
+              <button type="button" (click)="cancelEditing()" class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                Cancel
+              </button>
+              <button type="submit" [disabled]="editForm.invalid" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:opacity-50">
+                Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Project Display (shown when not editing) -->
+        <div *ngIf="!isEditing || editingProjectId !== project.id" class="md:col-span-12">
+          <!-- Left: Project Title & Type Badge -->
+          <header class="md:col-span-7 flex flex-col space-y-2">
+            <h2 class="text-2xl font-extrabold truncate" [title]="project.projectTitle">
+              {{ project.projectTitle }}
+            </h2>
+            <div class="flex items-center space-x-2">
+              <span class="text-xl" aria-label="Project Type">
+                {{ project.projectType === 'software' ? '💻' : '✍️' }}
+              </span>
+              <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded-full select-none">
+                {{ project.projectType === 'software' ? 'Software' : 'Writing' }}
+              </span>
+            </div>
+          </header>
+
+          <!-- Right: Due Date & Urgency -->
+          <div class="md:col-span-2 flex flex-col items-start space-y-1">
+            <div class="flex items-center space-x-1 text-sm font-medium">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2v-7H3v7a2 2 0 002 2z" />
+              </svg>
+              <time [attr.datetime]="project.dueDateTime" class="truncate" [title]="'Due: ' + formatDate(project.dueDateTime)">
+                <span [class.text-red-600]="isUrgent(project.dueDateTime)" [class.font-semibold]="isUrgent(project.dueDateTime)">
+                  {{ formatDate(project.dueDateTime) }}
+                </span>
+              </time>
+            </div>
+            <!-- Urgent Tag -->
+            <span *ngIf="isUrgent(project.dueDateTime)" class="inline-block bg-red-100 text-red-700 text-xs font-semibold px-2 py-0.5 rounded-full select-none">
+              Urgent
+            </span>
+          </div>
+
+          <!-- Budget Summary -->
+          <div class="md:col-span-3 flex flex-col items-end space-y-1">
+            <div class="flex items-center space-x-1 text-sm font-semibold text-gray-700">
+              <span aria-hidden="true" class="text-lg">💰</span>
+              <span>{{ project.paymentBudget ? 'KSh ' + project.paymentBudget : 'TBD' }}</span>
+            </div>
+            <div class="text-xs text-gray-400 italic">{{ project.paymentBudget ? 'Budget' : 'Budget not set' }}</div>
+          </div>
+
+          <!-- Divider -->
+          <div class="md:col-span-12 border-t border-gray-200 my-4"></div>
+
+          <!-- Key Details -->
+          <section class="md:col-span-7 space-y-2 text-gray-700 text-sm">
+            <h3 class="font-semibold text-gray-900">Key Details</h3>
+            <ul class="grid grid-cols-2 gap-x-6 gap-y-1">
+              <li *ngIf="project.programmingLanguages"><strong>Languages:</strong> {{ project.programmingLanguages }}</li>
+              <li *ngIf="project.framework"><strong>Framework:</strong> {{ project.framework }}</li>
+              <li *ngIf="project.requirements"><strong>Requirements:</strong> {{ project.requirements }}</li>
+              <li *ngIf="project.hosting"><strong>Hosting:</strong> {{ project.hosting }}</li>
+              <li *ngIf="project.deployment"><strong>Deployment:</strong> {{ project.deployment }}</li>
+              <li *ngIf="project.numberOfPages"><strong>Pages:</strong> {{ project.numberOfPages }}</li>
+              <li *ngIf="project.citationStyle"><strong>Citation:</strong> {{ project.citationStyle }}</li>
+              <li *ngIf="project.writingLevel"><strong>Level:</strong> {{ project.writingLevel }}</li>
+            </ul>
+          </section>
+
+          <!-- Attachments -->
+          <section *ngIf="project.attachmentsUrlFiles" class="md:col-span-5 flex flex-col space-y-2">
+            <h3 class="font-semibold text-gray-900">Attachments</h3>
+            <div class="flex items-center space-x-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h10M7 11h6m-6 4h10M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <a [href]="project.attachmentsUrlFiles" target="_blank" class="text-blue-600 hover:underline text-sm font-medium">View File</a>
+            </div>
+          </section>
+
+          <!-- Empty Bids Status & Time Since Posting -->
+          <section class="md:col-span-12 mt-4 flex flex-col md:flex-row md:justify-between items-start md:items-center space-y-2 md:space-y-0">
+            <div class="text-red-600 font-semibold flex items-center space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" />
+              </svg>
+              <span>No bids yet</span>
+            </div>
+            <div class="text-gray-500 text-sm italic">Posted {{ getTimeSince(project.createdAt) }}</div>
+          </section>
+
+          <!-- Call to Action Buttons -->
+          <footer class="md:col-span-12 mt-6 flex flex-wrap gap-3 justify-end">
+            <button 
+              type="button" 
+              (click)="startEditing(project)"
+              class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition"
+            >
+              Edit
+            </button>
+            <button 
+              type="button" 
+              (click)="deleteProject(project.id)"
+              class="px-4 py-2 rounded-lg border border-red-500 text-red-600 hover:bg-red-50 transition"
+            >
+              Delete
+            </button>
+            <button 
+              type="button" 
+              class="px-4 py-2 rounded-lg bg-yellow-400 text-yellow-900 font-semibold hover:bg-yellow-500 transition"
+            >
+              Boost Visibility
+            </button>
+          </footer>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>

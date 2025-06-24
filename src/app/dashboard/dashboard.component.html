@@ -1,177 +1,130 @@
 <div class="min-h-screen bg-gray-50 flex flex-col">
-
   <!-- Main Content Grid -->
   <main class="flex-1 p-6 container mx-auto">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Card 1: Completed Orders -->
-      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-green-500">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-sm font-medium text-gray-500">Completed Orders</p>
-            <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+      <!-- Completed Orders -->
+      <div class="cursor-pointer" (click)="navigateTo('/orders/completed')">
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-green-500">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Completed Orders</p>
+              <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+            </div>
+            <div class="bg-green-100 p-3 rounded-lg">
+              <i class="fas fa-check-circle text-green-600 text-xl"></i>
+            </div>
           </div>
-          <div class="bg-green-100 p-3 rounded-lg">
-            <i class="fas fa-check-circle text-green-600 text-xl"></i>
-          </div>
-        </div>
-        <div class="mt-4">
-          <p class="text-xs text-gray-500">Total Amount</p>
-          <p class="text-lg font-semibold text-gray-800">KES 0</p>
         </div>
       </div>
 
-      <!-- Card 2: Orders in Progress -->
-      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-blue-500">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-sm font-medium text-gray-500">Orders In Progress</p>
-            <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+      <!-- Post Orders -->
+      <div class="cursor-pointer" (click)="navigateTo('/orders/post')">
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-indigo-500">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Post Orders</p>
+              <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+            </div>
+            <div class="bg-indigo-100 p-3 rounded-lg">
+              <i class="fas fa-plus text-indigo-600 text-xl"></i>
+            </div>
           </div>
-          <div class="bg-blue-100 p-3 rounded-lg">
-            <i class="fas fa-spinner text-blue-600 text-xl"></i>
-          </div>
-        </div>
-        <div class="mt-4">
-          <p class="text-xs text-gray-500">Total Amount</p>
-          <p class="text-lg font-semibold text-gray-800">KES 0</p>
         </div>
       </div>
 
-      <!-- Card 3: Public Orders -->
-      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-purple-500">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-sm font-medium text-gray-500">Public Orders</p>
-            <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+      <!-- Orders In Progress -->
+      <div class="cursor-pointer" (click)="navigateTo('/orders/in-progress')">
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-blue-500">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Orders In Progress</p>
+              <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+            </div>
+            <div class="bg-blue-100 p-3 rounded-lg">
+              <i class="fas fa-spinner text-blue-600 text-xl"></i>
+            </div>
           </div>
-          <div class="bg-purple-100 p-3 rounded-lg">
-            <i class="fas fa-users text-purple-600 text-xl"></i>
-          </div>
-        </div>
-        <div class="mt-4">
-          <p class="text-xs text-gray-500">Total Amount</p>
-          <p class="text-lg font-semibold text-gray-800">KES 0</p>
         </div>
       </div>
 
-      <!-- Card 4: Unconfirmed Orders -->
-      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-yellow-500">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-sm font-medium text-gray-500">Unconfirmed Orders</p>
-            <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+      <!-- Unconfirmed Orders -->
+      <div class="cursor-pointer" (click)="navigateTo('/orders/unconfirmed')">
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-yellow-500">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Unconfirmed Orders</p>
+              <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+            </div>
+            <div class="bg-yellow-100 p-3 rounded-lg">
+              <i class="fas fa-hourglass-half text-yellow-600 text-xl"></i>
+            </div>
           </div>
-          <div class="bg-yellow-100 p-3 rounded-lg">
-            <i class="fas fa-hourglass-half text-yellow-600 text-xl"></i>
-          </div>
-        </div>
-        <div class="mt-4">
-          <p class="text-xs text-gray-500">Total Amount</p>
-          <p class="text-lg font-semibold text-gray-800">KES 0</p>
         </div>
       </div>
 
-      <!-- Card 5: Escrowed Orders -->
-      <!-- <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-green-500">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-sm font-medium text-gray-500">Escrowed Orders</p>
-            <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+      <!-- Paid Orders -->
+      <div class="cursor-pointer" (click)="navigateTo('/orders/paid')">
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-green-500">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Paid Orders</p>
+              <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+            </div>
+            <div class="bg-green-100 p-3 rounded-lg">
+              <i class="fas fa-money-bill-wave text-green-600 text-xl"></i>
+            </div>
           </div>
-          <div class="bg-green-100 p-3 rounded-lg">
-            <i class="fas fa-lock text-green-600 text-xl"></i>
-          </div>
-        </div>
-        <div class="mt-4">
-          <p class="text-xs text-gray-500">Total Amount</p>
-          <p class="text-lg font-semibold text-gray-800">KES 0</p>
-        </div>
-      </div> -->
-
-      <!-- Card 6: Paid Orders -->
-      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-green-500">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-sm font-medium text-gray-500">Paid Orders</p>
-            <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
-          </div>
-          <div class="bg-green-100 p-3 rounded-lg">
-            <i class="fas fa-money-bill-wave text-green-600 text-xl"></i>
-          </div>
-        </div>
-        <div class="mt-4">
-          <p class="text-xs text-gray-500">Total Amount</p>
-          <p class="text-lg font-semibold text-gray-800">KES 0</p>
         </div>
       </div>
 
-      <!-- Card 7: Unpaid Orders -->
-      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-red-500">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-sm font-medium text-gray-500">Unpaid Orders</p>
-            <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+      <!-- Unpaid Orders -->
+      <div class="cursor-pointer" (click)="navigateTo('/orders/unpaid')">
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-red-500">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Unpaid Orders</p>
+              <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+            </div>
+            <div class="bg-red-100 p-3 rounded-lg">
+              <i class="fas fa-exclamation-circle text-red-600 text-xl"></i>
+            </div>
           </div>
-          <div class="bg-red-100 p-3 rounded-lg">
-            <i class="fas fa-exclamation-circle text-red-600 text-xl"></i>
-          </div>
-        </div>
-        <div class="mt-4">
-          <p class="text-xs text-gray-500">Total Amount</p>
-          <p class="text-lg font-semibold text-gray-800">KES 0</p>
         </div>
       </div>
 
-      <!-- Card 8: Disputed Orders -->
-      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-red-500">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-sm font-medium text-gray-500">Disputed Orders</p>
-            <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+      <!-- Disputed Orders -->
+      <div class="cursor-pointer" (click)="navigateTo('/orders/disputed')">
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-red-500">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Disputed Orders</p>
+              <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+            </div>
+            <div class="bg-red-100 p-3 rounded-lg">
+              <i class="fas fa-gavel text-red-600 text-xl"></i>
+            </div>
           </div>
-          <div class="bg-red-100 p-3 rounded-lg">
-            <i class="fas fa-gavel text-red-600 text-xl"></i>
-          </div>
-        </div>
-        <div class="mt-4">
-          <p class="text-xs text-gray-500">Total Amount</p>
-          <p class="text-lg font-semibold text-gray-800">KES 0</p>
         </div>
       </div>
 
-      <!-- Card 9: Available For Take -->
-      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-purple-500">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-sm font-medium text-gray-500">Available For Take</p>
-            <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+      
+
+      <!-- Request / Bid -->
+      <div class="cursor-pointer" (click)="navigateTo('/orders/requests')">
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-indigo-500">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-gray-500">Requests / Bids</p>
+              <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
+            </div>
+            <div class="bg-indigo-100 p-3 rounded-lg">
+              <i class="fas fa-handshake text-indigo-600 text-xl"></i>
+            </div>
           </div>
-          <div class="bg-purple-100 p-3 rounded-lg">
-            <i class="fas fa-box-open text-purple-600 text-xl"></i>
-          </div>
-        </div>
-        <div class="mt-4">
-          <p class="text-xs text-gray-500">Total Amount</p>
-          <p class="text-lg font-semibold text-gray-800">KES 0</p>
         </div>
       </div>
 
-      <!-- Card 10: Request / Bid -->
-      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-indigo-500">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-sm font-medium text-gray-500">Request / Bid</p>
-            <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
-          </div>
-          <div class="bg-indigo-100 p-3 rounded-lg">
-            <i class="fas fa-handshake text-indigo-600 text-xl"></i>
-          </div>
-        </div>
-        <div class="mt-4">
-          <p class="text-xs text-gray-500">Total Amount</p>
-          <p class="text-lg font-semibold text-gray-800">KES 0</p>
-        </div>
-      </div>
+      
     </div>
   </main>
 

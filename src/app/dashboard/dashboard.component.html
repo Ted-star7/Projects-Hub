@@ -1,10 +1,12 @@
 <div class="min-h-screen bg-gray-50 flex flex-col">
   <!-- Main Content Grid -->
-  <main class="flex-1 p-6 container mx-auto">
+  <main class="flex-1 p-6 pb-36 container mx-auto">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <!-- Completed Orders -->
       <div class="cursor-pointer" (click)="navigateTo('/orders/completed')">
-        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-green-500">
+        <div
+          class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-green-500"
+        >
           <div class="flex justify-between items-start">
             <div>
               <p class="text-sm font-medium text-gray-500">Completed Orders</p>
@@ -19,7 +21,9 @@
 
       <!-- Post Orders -->
       <div class="cursor-pointer" (click)="navigateTo('/orders/post')">
-        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-indigo-500">
+        <div
+          class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-indigo-500"
+        >
           <div class="flex justify-between items-start">
             <div>
               <p class="text-sm font-medium text-gray-500">Post Orders</p>
@@ -34,10 +38,14 @@
 
       <!-- Orders In Progress -->
       <div class="cursor-pointer" (click)="navigateTo('/orders/in-progress')">
-        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-blue-500">
+        <div
+          class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-blue-500"
+        >
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-sm font-medium text-gray-500">Orders In Progress</p>
+              <p class="text-sm font-medium text-gray-500">
+                Orders In Progress
+              </p>
               <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
             </div>
             <div class="bg-blue-100 p-3 rounded-lg">
@@ -49,10 +57,14 @@
 
       <!-- Unconfirmed Orders -->
       <div class="cursor-pointer" (click)="navigateTo('/orders/unconfirmed')">
-        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-yellow-500">
+        <div
+          class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-yellow-500"
+        >
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-sm font-medium text-gray-500">Unconfirmed Orders</p>
+              <p class="text-sm font-medium text-gray-500">
+                Unconfirmed Orders
+              </p>
               <p class="text-2xl font-bold text-gray-800 mt-1">0</p>
             </div>
             <div class="bg-yellow-100 p-3 rounded-lg">
@@ -64,7 +76,9 @@
 
       <!-- Paid Orders -->
       <div class="cursor-pointer" (click)="navigateTo('/orders/paid')">
-        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-green-500">
+        <div
+          class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-green-500"
+        >
           <div class="flex justify-between items-start">
             <div>
               <p class="text-sm font-medium text-gray-500">Paid Orders</p>
@@ -79,7 +93,9 @@
 
       <!-- Unpaid Orders -->
       <div class="cursor-pointer" (click)="navigateTo('/orders/unpaid')">
-        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-red-500">
+        <div
+          class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-red-500"
+        >
           <div class="flex justify-between items-start">
             <div>
               <p class="text-sm font-medium text-gray-500">Unpaid Orders</p>
@@ -94,7 +110,9 @@
 
       <!-- Disputed Orders -->
       <div class="cursor-pointer" (click)="navigateTo('/orders/disputed')">
-        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-red-500">
+        <div
+          class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-red-500"
+        >
           <div class="flex justify-between items-start">
             <div>
               <p class="text-sm font-medium text-gray-500">Disputed Orders</p>
@@ -107,11 +125,11 @@
         </div>
       </div>
 
-      
-
-      <!-- Request / Bid -->
+      <!-- Requests / Bids -->
       <div class="cursor-pointer" (click)="navigateTo('/orders/requests')">
-        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-indigo-500">
+        <div
+          class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-indigo-500"
+        >
           <div class="flex justify-between items-start">
             <div>
               <p class="text-sm font-medium text-gray-500">Requests / Bids</p>
@@ -124,15 +142,61 @@
         </div>
       </div>
 
-      
+      <!-- ScriptHive AI Assistant Card -->
+      <div
+        class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-purple-500"
+      >
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <p class="text-sm font-medium text-gray-500">
+              ScriptHive Assistant
+            </p>
+            <p class="text-2xl font-bold text-gray-800 mt-1">AI Support</p>
+          </div>
+          <div class="bg-purple-100 p-3 rounded-lg">
+            <i class="fas fa-robot text-purple-600 text-xl"></i>
+          </div>
+        </div>
+
+        <!-- Buttons stacked inside the card -->
+        <div class="flex flex-col gap-3">
+          <button
+            (click)="playSupportMessage()"
+            class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-all transform hover:scale-105 flex items-center justify-center"
+          >
+            <i class="fas fa-comment-dots mr-2"></i> Ask ScriptHive
+          </button>
+
+          <button
+            (click)="playOrderSummary()"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-all transform hover:scale-105 flex items-center justify-center"
+          >
+            <i class="fas fa-chart-line mr-2"></i> My Summary
+          </button>
+        </div>
+      </div>
     </div>
   </main>
 
-  <!-- Floating Action Button -->
-  <div class="fixed bottom-8 right-8">
-    <button class="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center transition-all transform hover:scale-110">
-      <i class="fab fa-whatsapp text-2xl"></i>
-      <span class="ml-2 font-medium hidden sm:inline">Support</span>
+  <!-- Voice Assistant Buttons (Vertically Positioned) -->
+  <!-- <div class="fixed bottom-0 right-8 flex flex-col gap-4 items-end z-50">
+
+   
+    <button
+      (click)="playSupportMessage()"
+      class="bg-purple-600 hover:bg-purple-700 text-white p-4 rounded-full shadow-lg flex items-center justify-center transition-all transform hover:scale-110"
+    >
+      <i class="fas fa-robot text-2xl"></i>
+      <span class="ml-2 font-medium hidden sm:inline">Ask ScriptHive</span>
     </button>
-  </div>
+
+   
+    <button
+      (click)="playOrderSummary()"
+      class="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg flex items-center justify-center transition-all transform hover:scale-110"
+    >
+      <i class="fas fa-chart-line text-2xl"></i>
+      <span class="ml-2 font-medium hidden sm:inline">My Summary</span>
+    </button>
+  </div> -->
 </div>

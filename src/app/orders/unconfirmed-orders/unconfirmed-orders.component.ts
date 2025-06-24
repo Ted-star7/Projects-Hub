@@ -91,8 +91,7 @@ export class UnconfirmedOrdersComponent implements OnInit {
       id: this.editingProjectId
     };
 
-    this.servicesService.putRequest(
-      `/api/open/projects/${this.editingProjectId}`,
+    this.servicesService.putRequest(`/api/open/projects/${this.editingProjectId}`,
       updatedProject,
       this.sessionService.gettoken()
     ).subscribe({

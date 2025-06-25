@@ -7,11 +7,11 @@ import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 interface Project {
-  id: string;
+ id: string;
   projectTitle: string;
   category: string;
-  dueDate: string;
-  dueTime: string;
+  dueDate?: string;  
+  dueTime?: string;  
   description: string;
   numberOfPages?: string;
   citationStyle?: string;
@@ -175,66 +175,68 @@ export class UnconfirmedOrdersComponent implements OnInit {
     }
   }
 
-  combineDateTime(dateStr: string, timeStr: string): string {
-    if (!dateStr || !timeStr) return new Date().toISOString();
-    return `${dateStr}T${timeStr}:00`;
-  }
+ // Update these methods in your component class
 
-  formatDate(dateTimeStr: string): string {
-    if (!dateTimeStr) return 'No due date';
-    
-    try {
-      const date = new Date(dateTimeStr);
-      if (isNaN(date.getTime())) return 'Invalid date';
-      
-      const options: Intl.DateTimeFormatOptions = { 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      };
-      return date.toLocaleDateString('en-US', options);
-    } catch (e) {
-      return 'Invalid date';
-    }
-  }
+combineDateTime(dateStr: string | undefined, timeStr: string | undefined): string {
+  if (!dateStr || !timeStr) return new Date().toISOString();
+  return `${dateStr}T${timeStr}:00`;
+}
 
-  getTimeSince(dateString: string): string {
-    if (!dateString) return 'recently';
+formatDate(dateTimeStr: string | undefined): string {
+  if (!dateTimeStr) return 'No due date';
+  
+  try {
+    const date = new Date(dateTimeStr);
+    if (isNaN(date.getTime())) return 'Invalid date';
     
-    try {
-      const now = new Date();
-      const then = new Date(dateString);
-      if (isNaN(then.getTime())) return 'recently';
-      
-      const diff = now.getTime() - then.getTime();
-      
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
-      
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-      
-      const minutes = Math.floor(diff / (1000 * 60));
-      return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
-    } catch (e) {
-      return 'recently';
-    }
+    const options: Intl.DateTimeFormatOptions = { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    };
+    return date.toLocaleDateString('en-US', options);
+  } catch (e) {
+    return 'Invalid date';
   }
+}
 
-  isUrgent(dueDateTime: string): boolean {
-    if (!dueDateTime) return false;
+getTimeSince(dateString: string | undefined): string {
+  if (!dateString) return 'recently';
+  
+  try {
+    const now = new Date();
+    const then = new Date(dateString);
+    if (isNaN(then.getTime())) return 'recently';
     
-    try {
-      const now = new Date();
-      const due = new Date(dueDateTime);
-      if (isNaN(due.getTime())) return false;
-      
-      const diffHours = (due.getTime() - now.getTime()) / (1000 * 60 * 60);
-      return diffHours < 48; // Less than 2 days remaining
-    } catch (e) {
-      return false;
-    }
+    const diff = now.getTime() - then.getTime();
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+    
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    
+    const minutes = Math.floor(diff / (1000 * 60));
+    return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+  } catch (e) {
+    return 'recently';
   }
+}
+
+isUrgent(dueDateTime: string | undefined): boolean {
+  if (!dueDateTime) return false;
+  
+  try {
+    const now = new Date();
+    const due = new Date(dueDateTime);
+    if (isNaN(due.getTime())) return false;
+    
+    const diffHours = (due.getTime() - now.getTime()) / (1000 * 60 * 60);
+    return diffHours < 48;
+  } catch (e) {
+    return false;
+  }
+}
 }

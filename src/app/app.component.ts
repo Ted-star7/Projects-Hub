@@ -10,7 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
   standalone: true,
   imports: [RouterOutlet, CommonModule, SidebarComponent, NavbarComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'Projects-hub';
@@ -18,13 +18,9 @@ export class AppComponent {
   isSidebarOpen = false;
   isMobileView = false;
 
+  // Routes where sidebar/navbar are hidden
   protectedRoutes: string[] = [
-    '/', 
-    '/login', 
-    '/resetpassword', 
-    '/registration', 
-    '/activate-account'
-    
+    '/', '/login', '/resetpassword', '/registration', '/activate-account'
   ];
 
   constructor(
@@ -33,7 +29,6 @@ export class AppComponent {
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.checkViewport();
-      // Prevent flicker: Hide sidebar if initial route is protected
       this.hideSidebar = this.isProtectedRoute(this.router.url);
     }
   }
@@ -42,9 +37,10 @@ export class AppComponent {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const currentRoute = event.urlAfterRedirects;
+        console.log('Navigated to:', currentRoute);
         this.hideSidebar = this.isProtectedRoute(currentRoute);
+        console.log('Hide Sidebar:', this.hideSidebar);
 
-        // On mobile: close sidebar when navigating
         if (this.isMobileView && !this.hideSidebar) {
           this.isSidebarOpen = false;
         }
@@ -60,8 +56,8 @@ export class AppComponent {
   }
 
   private checkViewport() {
-    this.isMobileView = window.innerWidth < 768; 
-    this.isSidebarOpen = !this.isMobileView;     
+    this.isMobileView = window.innerWidth < 768;
+    this.isSidebarOpen = !this.isMobileView;
   }
 
   toggleSidebar() {
@@ -73,6 +69,6 @@ export class AppComponent {
   }
 
   private isProtectedRoute(url: string): boolean {
-    return this.protectedRoutes.some(path => url.startsWith(path));
+    return this.protectedRoutes.some(path => url === path);
   }
 }

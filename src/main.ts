@@ -11,7 +11,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(),
     provideRouter(routes),
-    provideAnimationsAsync(), // Keep this if using Angular 17+
+    provideAnimationsAsync(), 
   ],
 })
   .catch((err) => console.error(err));

@@ -17,7 +17,15 @@ export class AppComponent {
   hideSidebar = false;
   isSidebarOpen = false;
   isMobileView = false;
-  protectedRoutes = ['/', '/login', '/resetpassword', '/registration', '/activate-account', '/order'];
+
+  protectedRoutes: string[] = [
+    '/', 
+    '/login', 
+    '/resetpassword', 
+    '/registration', 
+    '/activate-account'
+    
+  ];
 
   constructor(
     private router: Router,
@@ -25,7 +33,23 @@ export class AppComponent {
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.checkViewport();
+      // Prevent flicker: Hide sidebar if initial route is protected
+      this.hideSidebar = this.isProtectedRoute(this.router.url);
     }
+  }
+
+  ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const currentRoute = event.urlAfterRedirects;
+        this.hideSidebar = this.isProtectedRoute(currentRoute);
+
+        // On mobile: close sidebar when navigating
+        if (this.isMobileView && !this.hideSidebar) {
+          this.isSidebarOpen = false;
+        }
+      }
+    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -36,34 +60,19 @@ export class AppComponent {
   }
 
   private checkViewport() {
-    this.isMobileView = window.innerWidth < 768; // Tailwind's md breakpoint
-    if (!this.isMobileView) {
-      this.isSidebarOpen = true; // Always show sidebar on desktop
-    } else {
-      this.isSidebarOpen = false; // Start closed on mobile
-    }
-  }
-
-  ngOnInit() {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        const currentRoute = event.urlAfterRedirects;
-        this.hideSidebar = this.protectedRoutes.includes(currentRoute);
-        
-        // Close sidebar on mobile when navigating
-        if (this.isMobileView && !this.hideSidebar) {
-          this.isSidebarOpen = false;
-        }
-      }
-    });
+    this.isMobileView = window.innerWidth < 768; 
+    this.isSidebarOpen = !this.isMobileView;     
   }
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
-  // Helper function for template type safety
   shouldShowNavbar(): boolean {
     return !this.hideSidebar;
+  }
+
+  private isProtectedRoute(url: string): boolean {
+    return this.protectedRoutes.some(path => url.startsWith(path));
   }
 }

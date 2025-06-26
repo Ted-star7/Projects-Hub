@@ -1,25 +1,31 @@
 <div class="relative min-h-screen flex">
   <!-- Sidebar (only shown on allowed routes) -->
-  <app-sidebar *ngIf="!hideSidebar"
-               [isSidebarOpen]="isSidebarOpen || !isMobileView"
-               [isMobileView]="isMobileView"
-               (toggleSidebar)="toggleSidebar()">
+  <app-sidebar
+    *ngIf="!hideSidebar"
+    [isSidebarOpen]="isSidebarOpen || !isMobileView"
+    [isMobileView]="isMobileView"
+    (toggleSidebar)="toggleSidebar()"
+  >
   </app-sidebar>
 
   <!-- Main Content Area -->
   <div class="flex-1 flex flex-col">
     <!-- Navbar (only shown on allowed routes) -->
-    <app-navbar *ngIf="!hideSidebar"
-                [isMobileView]="isMobileView"
-                [hideNavbar]="hideSidebar"
-                (toggleSidebar)="toggleSidebar()">
+    <app-navbar
+      *ngIf="!hideSidebar"
+      [isMobileView]="isMobileView"
+      [hideNavbar]="hideSidebar"
+      (toggleSidebar)="toggleSidebar()"
+    >
     </app-navbar>
 
     <!-- Content Area with conditional spacing -->
-    <div class="content-wrapper" 
-         [class.md:ml-64]="!hideSidebar"
-         [class.mt-[96px]]="!hideSidebar"
-         [class.mt-0]="hideSidebar">
+    <div
+      class="content-wrapper"
+      [class.md:ml-64]="!hideSidebar"
+      [class.mt-[96px]]="!hideSidebar"
+      [class.mt-0]="hideSidebar"
+    >
       <div class="content-inner">
         <router-outlet></router-outlet>
       </div>

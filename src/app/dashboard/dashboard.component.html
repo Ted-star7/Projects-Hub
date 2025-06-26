@@ -1,4 +1,25 @@
 <div class="min-h-screen bg-gray-50 flex flex-col">
+  <!-- Banner shown to inactive users -->
+<div
+  *ngIf="showBanner"
+  @slideFade
+  class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded mb-6 shadow-md flex justify-between items-start animate-fade-in"
+>
+  <div>
+    <p class="font-semibold mb-1">⚠️ Limited Access:</p>
+    <p>Your account is not activated. Please activate it to access full features.</p>
+    <a routerLink="/activate-account" class="text-blue-600 underline font-medium">Activate Now</a>
+  </div>
+  <button
+    (click)="showBanner = false"
+    class="text-yellow-700 font-bold text-xl ml-4 hover:text-yellow-900"
+    aria-label="Close alert"
+  >
+    &times;
+  </button>
+</div>
+
+
   <!-- Main Content Grid -->
   <main class="flex-1 p-6 pb-36 container mx-auto">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

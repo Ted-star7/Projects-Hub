@@ -33,13 +33,14 @@ export class ActivateAccountComponent implements OnInit {
   isEditing = false;
   userId: string | null = null;
   originalPhoneNumber: string = '';
+  activationAmount: number = 0; // Will be fetched from the API
 
   constructor(
     private servicesService: ServicesService,
     private snackBar: MatSnackBar,
     private router: Router,
     private fb: FormBuilder,
-    private sessionService: SessionService // Inject SessionService
+    private sessionService: SessionService 
   ) {
     this.phoneForm = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]]
@@ -53,6 +54,7 @@ export class ActivateAccountComponent implements OnInit {
     
     if (this.userId && token) {
       this.fetchUserPhoneNumber(token);
+      this.fetchActivationAmount(); 
     } else {
       this.snackBar.open('Please login to continue', 'Close', {
         duration: 3000,
@@ -62,97 +64,119 @@ export class ActivateAccountComponent implements OnInit {
     }
   }
 
- fetchUserPhoneNumber(token: string): void {
+  fetchActivationAmount(): void {
   this.isLoading = true;
-
-  this.servicesService.getRequest(`/api/phone/${this.userId}`, token).subscribe({
-    next: (response) => {
-      if (response.body) {
-        const raw = response.body.toString().replace(/\D/g, ''); // remove non-digits
-        let phone = raw;
-
-        // Normalize to 9-digit format
-        if (raw.length === 12 && raw.startsWith('254')) {
-          phone = raw.slice(3);
-        } else if (raw.length === 13 && raw.startsWith('254')) {
-          phone = raw.slice(3); // in case there's an accidental leading "0" after 254
-        } else if (raw.length === 10 && raw.startsWith('0')) {
-          phone = raw.slice(1);
-        }
-
-        this.originalPhoneNumber = phone;
-        this.phoneForm.patchValue({ phone });
+  this.servicesService.getRequest('/api/admin/budget-limit', null).subscribe({
+    next: (response: any) => {
+      if (response && response.status === 'SUCCESS' && response.body !== undefined) {
+        this.activationAmount = response.body; 
+        this.activationAmount = response.body * 1; // Adjust this multiplier as needed
+      } else {
+        // Default amount if not provided
+        this.activationAmount = 1;
       }
       this.isLoading = false;
     },
     error: (error) => {
-      console.error('Error fetching phone number:', error);
-      this.snackBar.open('Failed to fetch phone number', 'Close', {
-        duration: 3000,
-        panelClass: ['error-snackbar']
-      });
+      console.error('Error fetching activation amount:', error);
+      // Use default amount if API fails
+      this.activationAmount = 1;
       this.isLoading = false;
+      this.snackBar.open('Failed to fetch activation amount. Using default amount.', 'Close', {
+        duration: 3000,
+        panelClass: ['warning-snackbar']
+      });
     }
   });
 }
 
+  fetchUserPhoneNumber(token: string): void {
+    this.isLoading = true;
 
-initiatePayment(): void {
-  if (this.phoneForm.invalid) {
-    this.snackBar.open('Please enter a valid phone number (9 digits without country code)', 'Close', {
-      duration: 3000,
-      panelClass: ['error-snackbar']
-    });
-    return;
-  }
+    this.servicesService.getRequest(`/api/phone/${this.userId}`, token).subscribe({
+      next: (response) => {
+        if (response.body) {
+          const raw = response.body.toString().replace(/\D/g, ''); 
+          let phone = raw;
 
-  if (!this.userId) {
-    this.snackBar.open('User ID is missing. Please login again.', 'Close', {
-      duration: 3000,
-      panelClass: ['error-snackbar']
-    });
-    return;
-  }
+          // Normalize to 9-digit format
+          if (raw.length === 12 && raw.startsWith('254')) {
+            phone = raw.slice(3);
+          } else if (raw.length === 13 && raw.startsWith('254')) {
+            phone = raw.slice(3); 
+          } else if (raw.length === 10 && raw.startsWith('0')) {
+            phone = raw.slice(1);
+          }
 
-  this.isLoading = true;
-  const phoneNumber = `254${this.phoneForm.value.phone}`; // Add country code
-  const paymentMode = 'MPESA'; // You can make this dynamic later if needed
-
-  // Append userId as query parameter
-  const url = `/api/open/payment/initiate?userId=${this.userId}`;
-
-  // Request body per API spec
-  const body = { phoneNumber, paymentMode };
-
-  this.servicesService.postRequest(url, body, null).subscribe({
-    next: (response) => {
-      this.isLoading = false;
-      if (response.responseCode === '0') {
-        this.snackBar.open('Payment initiated successfully! Check your phone for STK push', 'Close', {
-          duration: 5000,
-          panelClass: ['success-snackbar']
+          this.originalPhoneNumber = phone;
+          this.phoneForm.patchValue({ phone });
+        }
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching phone number:', error);
+        this.snackBar.open('Failed to fetch phone number', 'Close', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
         });
+        this.isLoading = false;
+      }
+    });
+  }
 
-        setTimeout(() => {
-          this.router.navigate(['/login']);
-        }, 3000);
-      } else {
-        this.snackBar.open(response.customerMessage || 'Payment initiation failed', 'Close', {
+  initiateAccountActivation(): void {
+    if (this.phoneForm.invalid) {
+      this.snackBar.open('Please enter a valid phone number (9 digits without country code)', 'Close', {
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
+      return;
+    }
+
+    if (!this.userId) {
+      this.snackBar.open('User ID is missing. Please login again.', 'Close', {
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
+      return;
+    }
+
+    this.isLoading = true;
+    const phoneNumber = `254${this.phoneForm.value.phone}`; 
+
+    // Call the account activation API
+    const url = `/api/open/payment/user/initiate-activation?phoneNumber=${encodeURIComponent(phoneNumber)}&userId=${this.userId}`;
+
+    this.servicesService.postRequest(url, {}, null).subscribe({
+      next: (response) => {
+        this.isLoading = false;
+        if (response.status === 'success' || response.responseCode === '0') {
+          this.snackBar.open('Account activation initiated successfully! Check your phone for STK push', 'Close', {
+            duration: 5000,
+            panelClass: ['success-snackbar']
+          });
+
+          // You might want to poll for activation status or redirect after success
+          setTimeout(() => {
+            this.router.navigate(['/login']); 
+          }, 6000);
+        } else {
+          this.snackBar.open(response.message || response.customerMessage || 'Activation initiation failed', 'Close', {
+            duration: 5000,
+            panelClass: ['error-snackbar']
+          });
+        }
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.error('Activation initiation error:', error);
+        this.snackBar.open('Failed to initiate account activation. Please try again.', 'Close', {
           duration: 5000,
           panelClass: ['error-snackbar']
         });
       }
-    },
-    error: (error) => {
-      this.isLoading = false;
-      console.error('Payment initiation error:', error);
-      this.snackBar.open('Failed to initiate payment. Please try again.', 'Close', {
-        duration: 5000,
-        panelClass: ['error-snackbar']
-      });
-    }
-  });
-}
+    });
+  }
 
   toggleEdit(): void {
     this.isEditing = !this.isEditing;
@@ -163,11 +187,11 @@ initiatePayment(): void {
 
   onSubmit(): void {
     if (this.isEditing) {
-      // Here you would typically update the phone number on the server
-      this.toggleEdit(); // Just toggle back for now
+      
+      this.toggleEdit(); 
       return;
     }
     
-    this.initiatePayment();
+    this.initiateAccountActivation();
   }
 }

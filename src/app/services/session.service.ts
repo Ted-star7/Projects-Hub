@@ -16,7 +16,7 @@ export class SessionService {
       try {
         sessionStorage.setItem('token', token);
       } catch (error) {
-        console.error('Error saving token in session storage:', error);
+        console.error('Error saving token:', error);
       }
     }
   }
@@ -26,7 +26,7 @@ export class SessionService {
       try {
         sessionStorage.setItem('fullName', fullName);
       } catch (error) {
-        console.error('Error saving Fullname in session storage:', error);
+        console.error('Error saving fullName:', error);
       }
     }
   }
@@ -36,7 +36,7 @@ export class SessionService {
       try {
         sessionStorage.setItem('email', email);
       } catch (error) {
-        console.error('Error saving email in session storage:', error);
+        console.error('Error saving email:', error);
       }
     }
   }
@@ -46,17 +46,27 @@ export class SessionService {
       try {
         sessionStorage.setItem('userId', userId);
       } catch (error) {
-        console.error('Error saving userId in session storage:', error);
+        console.error('Error saving userId:', error);
       }
     }
   }
 
-  public getemail(): string | null {
-    return this.isBrowser ? sessionStorage.getItem('email') : null;
+  public setActiveStatus(isActive: boolean): void {
+    if (this.isBrowser) {
+      try {
+        sessionStorage.setItem('active', JSON.stringify(isActive));
+      } catch (error) {
+        console.error('Error saving active status:', error);
+      }
+    }
   }
 
-  public getUserId(): string | null {
-    return this.isBrowser ? sessionStorage.getItem('userId') : null;
+  public isActive(): boolean {
+    if (this.isBrowser) {
+      const stored = sessionStorage.getItem('active');
+      return stored === 'true'; // safely converts "true" string to boolean
+    }
+    return false;
   }
 
   public gettoken(): string | null {
@@ -67,12 +77,21 @@ export class SessionService {
     return this.isBrowser ? sessionStorage.getItem('fullName') : null;
   }
 
+  public getemail(): string | null {
+    return this.isBrowser ? sessionStorage.getItem('email') : null;
+  }
+
+  public getUserId(): string | null {
+    return this.isBrowser ? sessionStorage.getItem('userId') : null;
+  }
+
   public deleteSessions(): void {
     if (this.isBrowser) {
       sessionStorage.removeItem('email');
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('userId');
       sessionStorage.removeItem('fullName');
+      sessionStorage.removeItem('active');
     }
   }
 

@@ -41,9 +41,8 @@
       <div *ngIf="dropdowns.orders" class="ml-8 mt-1 space-y-1">
         <a
           *ngFor="let order of orderTypes"
-          [routerLink]="order.route"
-          routerLinkActive="bg-yellow-50 text-yellow-600"
-          class="flex items-center gap-3 p-2 text-sm hover:bg-yellow-50 rounded transition-all"
+          (click)="navigateIfActive(order.route)"
+          class="flex items-center gap-3 p-2 text-sm hover:bg-yellow-50 rounded transition-all cursor-pointer"
         >
           <i class="{{ order.icon }} w-4 text-center text-yellow-600"></i>
           <span>{{ order.name }}</span>
@@ -92,7 +91,9 @@
       routerLinkActive="bg-yellow-50 text-yellow-600 border-l-4 border-yellow-500"
       class="flex items-center p-3 rounded-lg hover:bg-yellow-50 hover:text-yellow-600 transition-all"
     >
-      <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center mr-3">
+      <div
+        class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center mr-3"
+      >
         <i class="fas fa-crown text-xs text-white"></i>
       </div>
       <span class="font-medium">Top Writers</span>
@@ -136,3 +137,31 @@
     </a>
   </nav>
 </aside>
+
+<!-- Inactive Account Banner -->
+
+<div
+  *ngIf="showBanner"
+  @slideFade
+  class="fixed top-20 left-64 right-4 z-50 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded shadow-md"
+>
+  <div class="flex justify-between items-start">
+    <div>
+      <p class="font-semibold mb-1">⚠️ Limited Access:</p>
+      <p>
+        Your account is not activated. Please activate it to access order pages.
+      </p>
+      <a
+        routerLink="/activate-account"
+        class="text-blue-600 underline font-medium"
+        >Activate Now</a
+      >
+    </div>
+    <button
+      (click)="showBanner = false"
+      class="text-yellow-700 font-bold text-xl ml-4"
+    >
+      &times;
+    </button>
+  </div>
+</div>

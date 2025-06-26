@@ -25,53 +25,54 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  onSubmit(form: NgForm) {
-    this.serverError = null;
+ onSubmit(form: NgForm) {
+  this.serverError = null;
 
-    if (!form.valid) {
-      form.control.markAllAsTouched();
-      return;
-    }
-
-    this.isSubmitting = true;
-
-    const payload = {
-      email: form.value.email,
-      password: form.value.password,
-    };
-
-    this.servicesService
-      .postRequest('/api/open/users/login', payload, null)
-      .pipe(
-        catchError((error) => {
-          this.serverError = error.message || 'Login failed.';
-          alert(this.serverError);
-          return throwError(() => error);
-        }),
-        finalize(() => {
-          this.isSubmitting = false;
-        })
-      )
-      .subscribe((response) => {
-        if (response?.status === 'success') {
-          alert('Login successful! Redirecting to dashboard...');
-          if (response.body) {
-            if (response.body.token)
-              this.sessionService.saveToken(response.body.token);
-            if (response.body.email)
-              this.sessionService.saveEmail(response.body.email);
-            if (response.body.userId)
-              this.sessionService.saveUserId(response.body.userId);
-            if (response.body.fullName)
-              this.sessionService.savefullName(response.body.fullName);
-          }
-
-          setTimeout(() => {
-            this.router.navigate(['/dashboard']);
-          }, 1500);
-        } else {
-          alert('Unexpected server response.');
-        }
-      });
+  if (!form.valid) {
+    form.control.markAllAsTouched();
+    return;
   }
+
+  this.isSubmitting = true;
+
+  const payload = {
+    email: form.value.email,
+    password: form.value.password,
+  };
+
+  this.servicesService
+    .postRequest('/api/open/users/login', payload, null)
+    .pipe(
+      catchError((error) => {
+        this.serverError = error.message || 'Login failed.';
+        alert(this.serverError);
+        return throwError(() => error);
+      }),
+      finalize(() => {
+        this.isSubmitting = false;
+      })
+    )
+    .subscribe((response) => {
+      if (response?.status === 'success' && response.body) {
+        const body = response.body;
+
+        if (body.token) this.sessionService.saveToken(body.token);
+        if (body.email) this.sessionService.saveEmail(body.email);
+        if (body.userId) this.sessionService.saveUserId(body.userId);
+        if (body.fullName) this.sessionService.savefullName(body.fullName);
+        if (body.active !== undefined) this.sessionService.setActiveStatus(body.active); // store boolean true/false
+
+        alert(
+          body.active
+            ? 'Login successful! Redirecting to dashboard...'
+            : 'Login successful! Your account is not yet active. Limited access granted.'
+        );
+
+        this.router.navigate(['/dashboard']);
+      } else {
+        alert('Unexpected server response.');
+      }
+    });
+}
+
 }

@@ -14,7 +14,7 @@
     <div class="bg-white rounded-xl shadow-lg overflow-hidden w-full max-w-md">
       <!-- Verification Header -->
       <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 p-4 text-center">
-        <h2 class="text-2xl font-bold text-white">Phone Verification</h2>
+        <h2 class="text-2xl font-bold text-white">Account Activation</h2>
       </div>
 
       <!-- Verification Content -->
@@ -26,10 +26,10 @@
         </div>
 
         <div class="text-center mb-6">
-          <p class="text-gray-700 mb-4">
-            Pay <span class="font-bold">KES 500</span> via M-Pesa to verify your phone number. 
-            You'll receive an STK push notification to complete the payment.
-          </p>
+       <p class="text-gray-700 mb-4">
+  Pay <span class="font-bold">{{activationAmount | currency:'KES ':'symbol':'1.0-0'}}</span> via M-Pesa to activate your account.
+  You'll receive an STK push notification to complete the payment.
+</p>
           <p class="text-sm text-gray-500">
             <mat-icon class="text-yellow-500 mr-1" style="font-size: 1rem; height: 1rem; width: 1rem; vertical-align: middle;">info</mat-icon>
             This amount will be credited to your ScriptHive wallet balance.
@@ -66,7 +66,7 @@
           >
             <mat-icon *ngIf="!isLoading">lock</mat-icon>
             <mat-spinner *ngIf="isLoading" diameter="20" strokeWidth="2"></mat-spinner>
-            <span class="ml-2">{{ isEditing ? 'Save Changes' : 'Verify Phone Number' }}</span>
+            <span class="ml-2">{{ isEditing ? 'Save Changes' : 'Activate Account' }}</span>
           </button>
         </form>
 
@@ -79,14 +79,4 @@
       </div>
     </div>
   </main>
-
-  <!-- Support Button -->
-  <!-- <div class="fixed bottom-6 right-6">
-    <button class="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-105 group">
-      <mat-icon>whatsapp</mat-icon>
-      <span class="ml-2 font-medium hidden sm:inline-block transform translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
-        Support
-      </span>
-    </button>
-  </div> -->
 </div>
